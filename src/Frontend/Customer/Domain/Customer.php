@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Src\Frontend\Customer\Domain;
 
-use Src\Frontend\Customer\Infrastructure\LaravelCustomerCreatedDomainEvent;
 use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
 
 final class Customer extends DomainEventAggregateRoot
