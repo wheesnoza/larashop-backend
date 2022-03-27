@@ -28,7 +28,7 @@ final class CustomerRepositoryTest extends CustomerModuleInfrastructureTestCase
 
         $this->repository()->save($customer);
 
-        $this->assertSame($customer, $this->repository()->find($customer->uuid()));
+        $this->assertEquals($customer, $this->repository()->find($customer->uuid()));
     }
 
 
