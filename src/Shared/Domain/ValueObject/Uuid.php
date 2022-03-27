@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Stringable;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-class Uuid implements Stringable
+abstract class Uuid implements Stringable
 {
     protected string $value;
 
@@ -18,17 +18,17 @@ class Uuid implements Stringable
         $this->value = $value;
     }
 
-    public static function generate(): static
+    final public static function generate(): static
     {
         return new static(RamseyUuid::uuid4()->toString());
     }
 
-    public function value(): string
+    final public function value(): string
     {
         return $this->value;
     }
 
-    public function equals(Uuid $other): bool
+    final public function equals(Uuid $other): bool
     {
         return $this->value() === $other->value();
     }

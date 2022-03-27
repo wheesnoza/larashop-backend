@@ -9,7 +9,9 @@ use Src\Shared\Domain\Bus\Event\DomainEvent;
 
 final class CustomerCreatedDomainEvent implements DomainEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public Customer $customer;
 

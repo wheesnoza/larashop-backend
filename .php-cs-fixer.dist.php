@@ -1,8 +1,12 @@
 <?php declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
+    ->exclude([
+        __DIR__ . '/src/Shared/Domain/ValueObject'
+    ])
     ->in([
         __DIR__ . '/app',
+        __DIR__ . '/src',
         __DIR__ . '/config',
         __DIR__ . '/database/factories',
         __DIR__ . '/database/seeders',
@@ -15,7 +19,7 @@ $config = new PhpCsFixer\Config();
 return $config
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PhpCsFixer:risky' => true,
+        '@PSR12' => true,
         'blank_line_after_opening_tag' => false,
         'linebreak_after_opening_tag' => false,
         'declare_strict_types' => true,

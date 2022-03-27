@@ -10,7 +10,8 @@ use Src\Frontend\Customer\Domain\Customer;
 
 final class WelcomeNotification extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public Customer $customer;
 

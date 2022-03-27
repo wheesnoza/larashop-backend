@@ -7,7 +7,7 @@ namespace Src\Shared\Domain\ValueObject;
 use Illuminate\Support\Facades\Hash;
 use Stringable;
 
-class Password implements Stringable
+abstract class Password implements Stringable
 {
     protected string $value;
 
@@ -16,12 +16,12 @@ class Password implements Stringable
         $this->value = Hash::needsRehash($value) ? Hash::make($value) : $value;
     }
 
-    public function value(): string
+    final public function value(): string
     {
         return $this->value;
     }
 
-    public function check(string $plain): bool
+    final public function check(string $plain): bool
     {
         return Hash::check($plain, $this->value());
     }
