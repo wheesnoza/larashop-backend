@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
@@ -9,7 +9,7 @@ use Src\Frontend\Product\Domain\ProductDescription;
 use Src\Frontend\Product\Domain\ProductName;
 use Src\Frontend\Product\Domain\ProductUuid;
 
-class Product extends Model
+final class Product extends Model
 {
     use HasFactory;
 
