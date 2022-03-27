@@ -18,7 +18,7 @@ class Uuid implements Stringable
         $this->value = $value;
     }
 
-    public static function generate(): self
+    public static function generate(): static
     {
         return new static(RamseyUuid::uuid4()->toString());
     }
