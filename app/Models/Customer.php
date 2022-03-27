@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Src\Frontend\Customer\Domain\Customer as DomainCustomer;
 use Src\Frontend\Customer\Domain\CustomerEmail;
 use Src\Frontend\Customer\Domain\CustomerFirstName;
@@ -13,7 +15,9 @@ use Src\Frontend\Customer\Domain\CustomerUuid;
 
 final class Customer extends Model
 {
+    use HasApiTokens;
     use HasFactory;
+    use Notifiable;
 
     protected $fillable = [
         'uuid',
