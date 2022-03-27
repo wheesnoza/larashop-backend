@@ -2,15 +2,7 @@
 
 namespace Src\Frontend\Customer\Domain;
 
-use App\Mail\WelcomeNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Mail;
-
-final class SendWelcomeNotification implements ShouldQueue
+interface SendWelcomeNotification
 {
-    public function handle(CustomerCreatedDomainEvent $event)
-    {
-        Mail::to($event->customer->email()->value())
-            ->send(new WelcomeNotification($event->customer));
-    }
+    public function handle(CustomerCreatedDomainEvent $event): void;
 }

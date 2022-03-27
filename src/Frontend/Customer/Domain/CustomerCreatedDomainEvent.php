@@ -2,17 +2,10 @@
 
 namespace Src\Frontend\Customer\Domain;
 
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use Src\Shared\Domain\Bus\Event\DomainEvent;
 
-final class CustomerCreatedDomainEvent implements DomainEvent
+abstract class CustomerCreatedDomainEvent implements DomainEvent
 {
-    use Dispatchable;
-    use InteractsWithSockets;
-    use SerializesModels;
-
     public Customer $customer;
 
     public function __construct(Customer $customer)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Frontend\Customer\Domain;
 
+use Src\Frontend\Customer\Infrastructure\LaravelCustomerCreatedDomainEvent;
 use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
 
 final class Customer extends DomainEventAggregateRoot
@@ -37,7 +38,7 @@ final class Customer extends DomainEventAggregateRoot
     ): self {
         $customer = new self($uuid, $email, $password, $firstName, $lastName);
 
-        $customer->record(new CustomerCreatedDomainEvent($customer));
+        $customer->record(new LaravelCustomerCreatedDomainEvent($customer));
 
         return $customer;
     }

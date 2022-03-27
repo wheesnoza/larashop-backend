@@ -4,13 +4,13 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Src\Frontend\Customer\Domain\CustomerCreatedDomainEvent;
-use Src\Frontend\Customer\Domain\SendWelcomeNotification;
+use Src\Frontend\Customer\Infrastructure\Mailer\LaravelMailerSendWelcomeNotification;
 
 final class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         CustomerCreatedDomainEvent::class => [
-            SendWelcomeNotification::class,
+            LaravelMailerSendWelcomeNotification::class,
         ],
     ];
 

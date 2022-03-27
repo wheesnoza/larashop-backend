@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Frontend\Customer\Domain;
 
-use Src\Frontend\Customer\Domain\CustomerLastName;
 use Src\Frontend\Customer\Domain\CustomerUuid;
 use Tests\Shared\Domain\MotherCreator;
 
