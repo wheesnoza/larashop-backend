@@ -43,6 +43,8 @@ optimize:
     docker-compose exec app php artisan optimize:clear
 app-bash:
 	docker-compose exec app /bin/sh
+format:
+	docker-compose exec app ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -v --diff
 
 .PHONY: npm
 ifeq (npm,$(firstword $(MAKECMDGOALS)))

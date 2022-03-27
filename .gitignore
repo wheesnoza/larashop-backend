@@ -18,3 +18,4 @@ yarn-error.log
 /.docker/mysql/storage
 /.docker/mysql/my.cnf
 /.docker/redis/storage
+/.php-cs-fixer.cache

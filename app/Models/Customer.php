@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
@@ -11,7 +11,7 @@ use Src\Frontend\Customer\Domain\CustomerLastName;
 use Src\Frontend\Customer\Domain\CustomerPassword;
 use Src\Frontend\Customer\Domain\CustomerUuid;
 
-class Customer extends Model
+final class Customer extends Model
 {
     use HasFactory;
 

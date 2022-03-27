@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Providers;
 
@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Src\Frontend\Customer\Domain\CustomerRepository;
 use Src\Frontend\Customer\Infrastructure\Persistence\EloquentCustomerRepository;
 
-class AppServiceProvider extends ServiceProvider
+final class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
