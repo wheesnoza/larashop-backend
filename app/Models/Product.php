@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Src\Frontend\Product\Domain\Product as DomainProduct;
 use Src\Frontend\Product\Domain\ProductDescription;
 use Src\Frontend\Product\Domain\ProductName;
@@ -18,6 +19,11 @@ final class Product extends Model
         'name',
         'description',
     ];
+
+    public function variants(): HasMany
+    {
+        return $this->hasMany(Variant::class);
+    }
 
     public function toDomain(): DomainProduct
     {
