@@ -38,7 +38,7 @@ final class Customer extends DomainEventAggregateRoot
     ): self {
         $customer = new self($uuid, $email, $password, $firstName, $lastName);
 
-        $customer->record(new LaravelCustomerCreatedDomainEvent($customer));
+        $customer->record(new CustomerCreatedDomainEvent($customer));
 
         return $customer;
     }
