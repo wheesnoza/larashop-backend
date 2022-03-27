@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Src\Frontend\Customer\Domain;
 
-final class Customer
+use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
+
+final class Customer extends DomainEventAggregateRoot
 {
     private CustomerUuid $uuid;
     private CustomerEmail $email;
@@ -12,8 +14,13 @@ final class Customer
     private CustomerFirstName $firstName;
     private CustomerLastName $lastName;
 
-    public function __construct(CustomerUuid $uuid, CustomerEmail $email, CustomerPassword $password, CustomerFirstName $firstName, CustomerLastName $lastName)
-    {
+    public function __construct(
+        CustomerUuid $uuid,
+        CustomerEmail $email,
+        CustomerPassword $password,
+        CustomerFirstName $firstName,
+        CustomerLastName $lastName
+    ) {
         $this->uuid = $uuid;
         $this->email = $email;
         $this->password = $password;
@@ -21,9 +28,18 @@ final class Customer
         $this->lastName = $lastName;
     }
 
-    public static function create(CustomerUuid $uuid, CustomerEmail $email, CustomerPassword $password, CustomerFirstName $firstName, CustomerLastName $lastName): self
-    {
-        return new self($uuid, $email, $password, $firstName, $lastName);
+    public static function create(
+        CustomerUuid $uuid,
+        CustomerEmail $email,
+        CustomerPassword $password,
+        CustomerFirstName $firstName,
+        CustomerLastName $lastName
+    ): self {
+        $customer = new self($uuid, $email, $password, $firstName, $lastName);
+
+        $customer->record(new CustomerCreatedDomainEvent($customer));
+
+        return $customer;
     }
 
     public function uuid(): CustomerUuid

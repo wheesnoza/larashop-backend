@@ -11,14 +11,17 @@ use Src\Frontend\Customer\Domain\CustomerLastName;
 use Src\Frontend\Customer\Domain\CustomerPassword;
 use Src\Frontend\Customer\Domain\CustomerRepository;
 use Src\Frontend\Customer\Domain\CustomerUuid;
+use Src\Shared\Domain\Bus\Event\EventBus;
 
 final class CustomerCreator
 {
     private CustomerRepository $customerRepository;
+    private EventBus $bus;
 
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(CustomerRepository $customerRepository, EventBus $bus)
     {
         $this->customerRepository = $customerRepository;
+        $this->bus = $bus;
     }
 
     public function __invoke(array $attributes): void
@@ -33,5 +36,7 @@ final class CustomerCreator
 
         $this->customerRepository
             ->save($customer);
+
+        $this->bus->publish(...$customer->pullDomainEvents());
     }
 }
