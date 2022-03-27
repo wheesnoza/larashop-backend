@@ -48,5 +48,6 @@ return $config
         'mb_str_functions' => true,
         'simplified_if_return' => true,
         'simplified_null_return' => true,
+        'no_unused_imports' => true,
     ])
     ->setFinder($finder);
