@@ -79,3 +79,10 @@ services:
     working_dir: /var/www/html
     networks:
       - laravel
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+        - 8025:8025
+    networks:
+        - laravel
