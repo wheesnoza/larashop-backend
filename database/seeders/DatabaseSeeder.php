@@ -16,6 +16,7 @@ final class DatabaseSeeder extends Seeder
         $this->call([
             CustomersTableSeeder::class,
             ProductsTableSeeder::class,
+            PurchasesTableSeeder::class,
         ]);
     }
 }
