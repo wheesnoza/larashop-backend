@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Seeders;
 
@@ -6,7 +6,7 @@ use App\Models\Customer;
 use App\Models\Purchase;
 use Illuminate\Database\Seeder;
 
-class PurchasesTableSeeder extends Seeder
+final class PurchasesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

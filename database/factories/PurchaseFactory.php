@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Factories;
 
@@ -6,7 +6,7 @@ use App\Models\Customer;
 use App\Models\Variant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PurchaseFactory extends Factory
+final class PurchaseFactory extends Factory
 {
     public function definition(): array
     {
