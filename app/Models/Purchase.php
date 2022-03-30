@@ -18,6 +18,12 @@ final class Purchase extends Model
         'priority',
     ];
 
+    protected $hidden = [
+        'id',
+        'customer_id',
+        'variant_id',
+    ];
+
     public function variant(): HasOne
     {
         return $this->hasOne(

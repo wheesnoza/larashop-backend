@@ -20,6 +20,10 @@ final class Product extends Model
         'description',
     ];
 
+    protected $hidden = [
+        'id',
+    ];
+
     public function variants(): HasMany
     {
         return $this->hasMany(Variant::class);

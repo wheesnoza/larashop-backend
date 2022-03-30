@@ -29,6 +29,7 @@ final class Customer extends Model
     ];
 
     protected $hidden = [
+        'id',
         'password',
     ];
 
