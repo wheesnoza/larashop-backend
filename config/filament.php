@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'path' => env('FILAMENT_PATH', 'admin'),
+    'path' => env('FILAMENT_PATH'),
 
 
     /*
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'domain' => env('FILAMENT_DOMAIN'),
+    'domain' => env('FILAMENT_DOMAIN', 'admin.larashop.test'),
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return [
     */
 
     'auth' => [
-        'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
+        'guard' => env('FILAMENT_AUTH_GUARD', 'admin'),
         'pages' => [
             'login' => \Filament\Http\Livewire\Auth\Login::class,
         ],
