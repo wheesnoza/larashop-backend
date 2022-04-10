@@ -2,7 +2,9 @@
 
 namespace Src\Frontend\Product\Domain;
 
-final class Product
+use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
+
+final class Product extends DomainEventAggregateRoot
 {
     private ProductUuid $uuid;
     private ProductName $name;
@@ -23,7 +25,11 @@ final class Product
         ProductName $name,
         ProductDescription $description
     ): self {
-        return new self($uuid, $name, $description);
+        $product = new self($uuid, $name, $description);
+
+        $product->record(new ProductCreatedDomainEvent($product));
+
+        return $product;
     }
 
     /**
