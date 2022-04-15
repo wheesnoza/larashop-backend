@@ -29,17 +29,14 @@ final class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('api')
+            Route::domain('api.larashop.test')
                 ->middleware('api')
                 ->name('api.')
                 ->group(base_path('routes/api.php'));
 
-            Route::domain('www.larashop.test')
-                ->middleware('web')
-                ->group(base_path('routes/web.php'));
-
             Route::domain('admin.larashop.test')
                 ->middleware('web')
+                ->name('admin.')
                 ->group(base_path('routes/admin.php'));
         });
     }
