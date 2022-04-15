@@ -24,7 +24,7 @@ final class CustomerCreator
         $this->bus = $bus;
     }
 
-    public function __invoke(array $attributes): void
+    public function __invoke(array $attributes): Customer
     {
         $customer = Customer::create(
             CustomerUuid::generate(),
@@ -38,5 +38,7 @@ final class CustomerCreator
             ->save($customer);
 
         $this->bus->publish(...$customer->pullDomainEvents());
+
+        return $customer;
     }
 }
