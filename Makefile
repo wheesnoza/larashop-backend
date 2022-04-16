@@ -6,7 +6,7 @@ init:
 	cp .env.example .env
 	@make build
 	@make up
-	@make composer update
+	docker-compose exec app composer install
 	@make npm install
 	@make npm run dev
 	docker-compose exec app php artisan key:generate
@@ -60,4 +60,4 @@ ifeq (composer,$(firstword $(MAKECMDGOALS)))
   $(eval $(RUN_ARGS):;@:)
 endif
 composer:
-	docker-compose run --rm composer $(RUN_ARGS)
+	docker-compose exec app composer $(RUN_ARGS)
