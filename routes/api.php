@@ -1,17 +1,13 @@
 <?php declare(strict_types=1);
 
+use App\Http\Controllers\Frontend\Auth\AuthController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user-self-health', function () {
-        return response()->json([
-            'status' => 'ok'
-        ], 200);
-    });
-});
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/guest-self-health', function () {
-    return response()->json([
-        'status' => 'ok'
-    ], 200);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/products', function () {
+        return Product::all();
+    });
 });
