@@ -71,15 +71,6 @@ services:
     networks:
       - laravel
 
-  composer:
-    image: composer:latest
-    container_name: ${APP_NAME:-laravel}_composer
-    volumes:
-    - .:/var/www/html
-    working_dir: /var/www/html
-    networks:
-      - laravel
-
   mailhog:
     image: mailhog/mailhog
     ports:
