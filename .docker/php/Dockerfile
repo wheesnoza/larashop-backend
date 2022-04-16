@@ -5,3 +5,5 @@ RUN apk --update-cache --no-cache add libzip-dev unzip git && rm -rf /var/cache/
 
 RUN git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
     && docker-php-ext-install redis
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
