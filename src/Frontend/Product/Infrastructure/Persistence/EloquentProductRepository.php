@@ -21,7 +21,7 @@ final class EloquentProductRepository implements ProductRepository
         );
     }
 
-    public function find(ProductUuid $uuid): ?Product
+    public function find(string|ProductUuid $uuid): ?Product
     {
         return EloquentModelProduct::firstWhere('uuid', $uuid)?->toDomain();
     }

@@ -3,7 +3,6 @@
 namespace App\Frontend\Product\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Src\Frontend\Product\Domain\ProductUuid;
 
 final class ShowProductRequest extends FormRequest
 {
@@ -15,10 +14,5 @@ final class ShowProductRequest extends FormRequest
     public function rules(): array
     {
         return [];
-    }
-
-    public function uuid(): ProductUuid
-    {
-        return new ProductUuid($this->route('uuid'));
     }
 }
