@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Frontend\Product\Infrastructure\Persistence;
 
-use App\Models\Product as EloquentModelProduct;
+use App\Shared\Models\Product as EloquentModelProduct;
 use Src\Frontend\Product\Domain\Product;
 use Src\Frontend\Product\Domain\ProductRepository;
 use Src\Frontend\Product\Domain\ProductUuid;

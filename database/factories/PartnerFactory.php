@@ -2,19 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Shared\Models\Partner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Partner>
- */
 final class PartnerFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition()
+    protected $model = Partner::class;
+
+    public function definition(): array
     {
         return [
             'uuid' => $this->faker->unique()->uuid(),

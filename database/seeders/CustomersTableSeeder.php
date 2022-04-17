@@ -2,19 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
+use Database\Factories\CustomerFactory;
 use Illuminate\Database\Seeder;
 
 final class CustomersTableSeeder extends Seeder
 {
     public function run()
     {
-        Customer::factory()
-            ->create([
-                'email' => 'test@test.example'
-            ]);
+        $factory = new CustomerFactory();
 
-        Customer::factory()
+        $factory->create([
+            'email' => 'test@test.example'
+        ]);
+
+        $factory
             ->count(9)
             ->create();
     }

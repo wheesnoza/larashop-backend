@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Frontend\Customer\Infrastructure\Persistence;
 
-use App\Models\Customer as EloquentModelCustomer;
+use App\Shared\Models\Customer as EloquentModelCustomer;
 use Src\Frontend\Customer\Domain\Customer;
 use Src\Frontend\Customer\Domain\CustomerRepository;
 use Src\Frontend\Customer\Domain\CustomerUuid;

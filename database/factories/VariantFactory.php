@@ -2,15 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
+use App\Shared\Models\Variant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class VariantFactory extends Factory
 {
-    public function definition()
+    protected $model = Variant::class;
+
+    public function definition(): array
     {
         return [
-            'product_id' => Product::factory(),
+            'product_id' => new ProductFactory(),
             'uuid' => $this->faker->unique()->uuid(),
             'name' => $this->faker->sentence(),
             'price' => $this->faker->randomNumber(),

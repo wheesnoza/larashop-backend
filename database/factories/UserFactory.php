@@ -2,12 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Shared\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 final class UserFactory extends Factory
 {
-    public function definition()
+    protected $model = User::class;
+
+    public function definition(): array
     {
         return [
             'name' => $this->faker->name(),

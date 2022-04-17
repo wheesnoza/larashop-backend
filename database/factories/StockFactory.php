@@ -2,15 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Variant;
+use App\Shared\Models\Stock;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class StockFactory extends Factory
 {
+    protected $model = Stock::class;
+
     public function definition(): array
     {
         return [
-            'variant_id' => Variant::factory(),
+            'variant_id' => new VariantFactory(),
         ];
     }
 }

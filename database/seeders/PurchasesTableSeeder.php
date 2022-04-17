@@ -2,20 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
-use App\Models\Purchase;
+use App\Shared\Models\Customer;
+use Database\Factories\PurchaseFactory;
 use Illuminate\Database\Seeder;
 
 final class PurchasesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        Purchase::factory()
+        $factory = new PurchaseFactory();
+
+        $factory
             ->create([
                 'customer_id' => Customer::firstWhere('email', 'test@test.example')->id
             ]);

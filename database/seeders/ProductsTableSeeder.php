@@ -2,21 +2,23 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use App\Models\Stock;
-use App\Models\Variant;
+use Database\Factories\ProductFactory;
+use Database\Factories\StockFactory;
+use Database\Factories\VariantFactory;
 use Illuminate\Database\Seeder;
 
 final class ProductsTableSeeder extends Seeder
 {
     public function run()
     {
-        Product::factory()
+        $factory = new ProductFactory();
+
+        $factory
             ->has(
-                Variant::factory()
+                (new VariantFactory())
                     ->count(3)
                     ->has(
-                        Stock::factory()
+                        (new StockFactory())
                             ->count(5)
                     )
             )

@@ -70,15 +70,15 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => \App\Shared\Models\User::class,
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Administrator::class,
+            'model' => \App\Shared\Models\Administrator::class,
         ],
         'customers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Customer::class,
+            'model' => \App\Shared\Models\Customer::class,
         ],
     ],
 

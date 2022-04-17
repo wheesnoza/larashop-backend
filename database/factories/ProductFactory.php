@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Shared\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class ProductFactory extends Factory
 {
+    protected $model = Product::class;
+
     public function definition(): array
     {
         return [

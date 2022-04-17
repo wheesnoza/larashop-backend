@@ -2,7 +2,7 @@
 
 namespace Src\Frontend\Customer\Infrastructure\Mailer;
 
-use App\Mail\WelcomeNotification;
+use App\Shared\Mail\WelcomeNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use Src\Frontend\Customer\Domain\CustomerCreatedDomainEvent;

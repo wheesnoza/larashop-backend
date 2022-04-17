@@ -1,13 +1,12 @@
 <?php declare(strict_types=1);
 
-use App\Http\Controllers\Frontend\Auth\AuthController;
-use App\Models\Product;
+use App\Frontend\Auth\Http\Controllers\AuthController;
+use App\Frontend\Product\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/products', function () {
-        return Product::all();
-    });
 });
+
+Route::get('/products/{uuid}', [ProductController::class, 'show']);

@@ -2,12 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Shared\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
 final class CustomerFactory extends Factory
 {
-    public function definition()
+    protected $model = Customer::class;
+
+    public function definition(): array
     {
         return [
             'uuid' => $this->faker->unique()->uuid(),
