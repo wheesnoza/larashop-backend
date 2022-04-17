@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Shared\Mail;
+namespace App\Frontend\Auth\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

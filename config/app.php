@@ -183,7 +183,8 @@ return [
         /*
          * Event Service Providers...
          */
-        \App\Frontend\Product\Providers\ProductEventServiceProvider::class
+        \App\Frontend\Auth\Providers\AuthEventServiceProvider::class,
+        \App\Frontend\Product\Providers\ProductEventServiceProvider::class,
 
     ],
 

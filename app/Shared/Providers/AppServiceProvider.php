@@ -20,11 +20,6 @@ final class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            ProductRepository::class,
-            EloquentProductRepository::class
-        );
-
-        $this->app->bind(
             EventBus::class,
             LaravelEventBus::class
         );
