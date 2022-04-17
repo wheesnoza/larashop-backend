@@ -42,69 +42,45 @@ final class Variant
         VariantWidth $width,
         VariantWeight $weight,
         VariantActive $active
-    ) {
+    ): self {
         return new self($uuid, $name, $price, $color, $height, $width, $weight, $active);
     }
 
-    /**
-     * @return VariantUuid
-     */
     public function uuid(): VariantUuid
     {
         return $this->uuid;
     }
 
-    /**
-     * @return VariantName
-     */
     public function name(): VariantName
     {
         return $this->name;
     }
 
-    /**
-     * @return VariantPrice
-     */
     public function price(): VariantPrice
     {
         return $this->price;
     }
 
-    /**
-     * @return VariantColor
-     */
     public function color(): VariantColor
     {
         return $this->color;
     }
 
-    /**
-     * @return VariantHeight
-     */
     public function height(): VariantHeight
     {
         return $this->height;
     }
 
-    /**
-     * @return VariantWidth
-     */
     public function width(): VariantWidth
     {
         return $this->width;
     }
 
-    /**
-     * @return VariantWeight
-     */
     public function weight(): VariantWeight
     {
         return $this->weight;
     }
 
-    /**
-     * @return VariantActive
-     */
     public function active(): VariantActive
     {
         return $this->active;

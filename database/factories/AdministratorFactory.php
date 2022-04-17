@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class AdministratorFactory extends Factory
+final class AdministratorFactory extends Factory
 {
     public function definition(): array
     {

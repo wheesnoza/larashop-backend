@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Src\Frontend\Product\Application\Create;
 
@@ -9,7 +9,7 @@ use Src\Frontend\Product\Domain\ProductRepository;
 use Src\Frontend\Product\Domain\ProductUuid;
 use Src\Shared\Domain\Bus\Event\EventBus;
 
-class ProductCreator
+final class ProductCreator
 {
     private ProductRepository $productRepository;
     private EventBus $bus;
