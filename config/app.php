@@ -180,6 +180,7 @@ return [
          * Repository Service Providers...
          */
         \App\Frontend\Product\Providers\ProductRepositoryServiceProvider::class,
+        \App\Frontend\Auth\Providers\AuthRepositoryServiceProvider::class,
         /*
          * Event Service Providers...
          */
