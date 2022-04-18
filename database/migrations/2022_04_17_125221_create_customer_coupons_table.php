@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('customer_coupons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->index();
-            $table->foreignId('variant_id')->index();
-            $table->uuid()->unique();
-            $table->tinyInteger('state');
-            $table->tinyInteger('priority');
+            $table->foreignId('customer_id')
+                ->constrained();
+            $table->foreignId('coupon_id')
+                ->constrained();
+            $table->dateTime('expire_at');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('customer_coupons');
     }
 };

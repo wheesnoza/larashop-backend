@@ -5,8 +5,8 @@ namespace Src\Frontend\Customer\Infrastructure\Mailer;
 use App\Frontend\Auth\Mail\WelcomeNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
+use Src\Frontend\Customer\Application\Listener\SendWelcomeNotification;
 use Src\Frontend\Customer\Domain\CustomerCreatedDomainEvent;
-use Src\Frontend\Customer\Domain\SendWelcomeNotification;
 
 final class LaravelMailerSendWelcomeNotification implements SendWelcomeNotification, ShouldQueue
 {

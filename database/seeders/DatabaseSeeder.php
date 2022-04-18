@@ -17,6 +17,8 @@ final class DatabaseSeeder extends Seeder
             CustomersTableSeeder::class,
             ProductsTableSeeder::class,
             PurchasesTableSeeder::class,
+            CouponsTableSeeder::class,
+            CustomerCouponsTableSeeder::class,
         ]);
     }
 }

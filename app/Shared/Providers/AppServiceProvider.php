@@ -3,10 +3,14 @@
 namespace App\Shared\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Src\Frontend\Coupon\Domain\CouponRepository;
+use Src\Frontend\Coupon\Infrastructure\Persistence\EloquentCouponRepository;
 use Src\Frontend\Customer\Domain\CustomerRepository;
 use Src\Frontend\Customer\Infrastructure\Persistence\EloquentCustomerRepository;
 use Src\Shared\Domain\Bus\Event\EventBus;
+use Src\Shared\Domain\Transaction\TransactionRepository;
 use Src\Shared\Infrastructure\Bus\Event\LaravelEventBus;
+use Src\Shared\Infrastructure\Transaction\LaravelTransactionRepository;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +19,16 @@ final class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CustomerRepository::class,
             EloquentCustomerRepository::class
+        );
+
+        $this->app->bind(
+            CouponRepository::class,
+            EloquentCouponRepository::class
+        );
+
+        $this->app->bind(
+            TransactionRepository::class,
+            LaravelTransactionRepository::class
         );
 
         $this->app->bind(

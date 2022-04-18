@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Shared\Models\Purchase;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Src\Frontend\Purchase\Domain\PurchasePriority;
+use Src\Frontend\Purchase\Domain\PurchaseState;
 
 final class PurchaseFactory extends Factory
 {
@@ -15,8 +17,8 @@ final class PurchaseFactory extends Factory
             'customer_id' => new CustomerFactory(),
             'variant_id' => new VariantFactory(),
             'uuid' => $this->faker->unique()->uuid(),
-            'state' => $this->faker->randomElement(['reserved', 'preparing', 'shipped', 'delivered']),
-            'priority' => $this->faker->numberBetween(1, 3),
+            'state' => $this->faker->randomElement(PurchaseState::cases())->value,
+            'priority' => $this->faker->randomElement(PurchasePriority::cases())->value,
         ];
     }
 }

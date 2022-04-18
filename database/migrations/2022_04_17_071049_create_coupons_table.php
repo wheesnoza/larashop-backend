@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->index();
-            $table->foreignId('variant_id')->index();
-            $table->uuid()->unique();
-            $table->tinyInteger('state');
-            $table->tinyInteger('priority');
+            $table->string('code', 6);
+            $table->string('title');
+            $table->string('description')->nullable();
+            $table->tinyInteger('type');
+            $table->json('content');
+            $table->dateTime('holding_period_start');
+            $table->dateTime('holding_period_end');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('coupons');
     }
 };
