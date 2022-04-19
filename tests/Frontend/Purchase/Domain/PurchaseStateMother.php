@@ -7,7 +7,7 @@ use Tests\Shared\Domain\MotherCreator;
 
 final class PurchaseStateMother
 {
-    public static function create(?string $value = null): PurchaseState
+    public static function create(?int $value = 0): PurchaseState
     {
         return PurchaseState::tryFrom($value) ?? MotherCreator::random()
                 ->randomElement(PurchaseState::cases());

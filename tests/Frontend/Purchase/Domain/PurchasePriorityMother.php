@@ -7,7 +7,7 @@ use Tests\Shared\Domain\MotherCreator;
 
 final class PurchasePriorityMother
 {
-    public static function create(?string $value = null): PurchasePriority
+    public static function create(?int $value = 0): PurchasePriority
     {
         return PurchasePriority::tryFrom($value) ?? MotherCreator::random()
             ->randomElement(PurchasePriority::cases());

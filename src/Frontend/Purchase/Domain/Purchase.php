@@ -78,4 +78,16 @@ final class Purchase extends DomainEventAggregateRoot
     {
         return $this->quantity;
     }
+
+    public function toPrimitives(): array
+    {
+        return [
+            'uuid' => $this->uuid->value(),
+            'customer_uuid' => $this->customerUuid->value(),
+            'variant_uuid' => $this->variantUuid->value(),
+            'state' => $this->state->value,
+            'priority' => $this->priority->value,
+            'quantity' => $this->quantity->value(),
+        ];
+    }
 }

@@ -32,7 +32,7 @@ final class ProductRepositoryTest extends ProductModuleInfrastructureTestCase
     }
 
 
-    public function test_should_not_return_a_non_existing_product(): void
+    public function test_should_return_null_when_product_no_exists(): void
     {
         $this->assertNull($this->repository()->find(ProductUuidMother::create()));
     }
