@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Factories;
 
 use App\Shared\Models\CustomerCoupon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CustomerCouponFactory extends Factory
+final class CustomerCouponFactory extends Factory
 {
     protected $model = CustomerCoupon::class;
 

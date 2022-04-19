@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Src\Frontend\Auth\Infrastructure\Persistence;
 
@@ -7,7 +7,7 @@ use Src\Frontend\Auth\Domain\CustomerAuthRepository;
 use Src\Frontend\Customer\Domain\Customer;
 use App\Shared\Models\Customer as CustomerModel;
 
-class LaravelCustomerAuthRepository implements CustomerAuthRepository
+final class LaravelCustomerAuthRepository implements CustomerAuthRepository
 {
     public function login(Customer $customer)
     {

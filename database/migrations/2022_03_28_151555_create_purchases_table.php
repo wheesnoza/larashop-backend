@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->index();
-            $table->foreignId('variant_id')->index();
-            $table->uuid()->unique();
+            $table->foreignId('customer_id')
+                ->constrained();
+            $table->foreignId('variant_id')
+                ->constrained();
+            $table->uuid()
+                ->unique();
             $table->tinyInteger('state');
             $table->tinyInteger('priority');
+            $table->tinyInteger('quantity');
             $table->timestamps();
         });
     }

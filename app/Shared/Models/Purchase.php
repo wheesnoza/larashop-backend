@@ -15,6 +15,7 @@ final class Purchase extends Model
         'uuid',
         'state',
         'priority',
+        'quantity',
     ];
 
     protected $casts = [

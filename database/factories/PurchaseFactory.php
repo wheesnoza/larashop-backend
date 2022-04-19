@@ -19,6 +19,7 @@ final class PurchaseFactory extends Factory
             'uuid' => $this->faker->unique()->uuid(),
             'state' => $this->faker->randomElement(PurchaseState::cases())->value,
             'priority' => $this->faker->randomElement(PurchasePriority::cases())->value,
+            'quantity' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

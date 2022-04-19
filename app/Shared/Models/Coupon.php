@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Shared\Models;
 
@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Src\Frontend\Coupon\Domain\CouponType;
 
-class Coupon extends Model
+final class Coupon extends Model
 {
     protected $fillable = [
         'code',

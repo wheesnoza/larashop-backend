@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Seeders;
 
 use Database\Factories\CouponFactory;
 use Illuminate\Database\Seeder;
 
-class CouponsTableSeeder extends Seeder
+final class CouponsTableSeeder extends Seeder
 {
     public function run()
     {

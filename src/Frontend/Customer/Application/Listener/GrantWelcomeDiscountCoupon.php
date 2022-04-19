@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Src\Frontend\Customer\Application\Listener;
 
@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Src\Frontend\Coupon\Domain\CouponRepository;
 use Src\Frontend\Customer\Domain\CustomerCreatedDomainEvent;
 
-class GrantWelcomeDiscountCoupon
+final class GrantWelcomeDiscountCoupon
 {
     private CouponRepository $couponRepository;
 

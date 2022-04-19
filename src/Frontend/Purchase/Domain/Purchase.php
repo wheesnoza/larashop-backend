@@ -1,36 +1,57 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Src\Frontend\Purchase\Domain;
 
 use Src\Frontend\Customer\Domain\CustomerUuid;
 use Src\Frontend\Variant\Domain\VariantUuid;
+use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
 
-class Purchase
+final class Purchase extends DomainEventAggregateRoot
 {
+    private PurchaseUuid $uuid;
     private CustomerUuid $customerUuid;
     private VariantUuid $variantUuid;
     private PurchaseState $state;
     private PurchasePriority $priority;
+    private PurchaseQuantity $quantity;
 
     public function __construct(
+        PurchaseUuid $uuid,
         CustomerUuid $customerUuid,
         VariantUuid $variantUuid,
         PurchaseState $state,
-        PurchasePriority $priority
+        PurchasePriority $priority,
+        PurchaseQuantity $quantity
     ) {
+        $this->uuid = $uuid;
         $this->customerUuid = $customerUuid;
         $this->variantUuid = $variantUuid;
         $this->state = $state;
         $this->priority = $priority;
+        $this->quantity = $quantity;
     }
 
     public static function create(
+        PurchaseUuid $uuid,
         CustomerUuid $customerUuid,
         VariantUuid $variantUuid,
         PurchaseState $state,
-        PurchasePriority $priority
+        PurchasePriority $priority,
+        PurchaseQuantity $quantity
     ): self {
-        return new self($customerUuid, $variantUuid, $state, $priority);
+        return new self(
+            $uuid,
+            $customerUuid,
+            $variantUuid,
+            $state,
+            $priority,
+            $quantity
+        );
+    }
+
+    public function uuid(): PurchaseUuid
+    {
+        return $this->uuid;
     }
 
     public function customerUuid(): CustomerUuid
@@ -51,5 +72,10 @@ class Purchase
     public function priority(): PurchasePriority
     {
         return $this->priority;
+    }
+
+    public function quantity(): PurchaseQuantity
+    {
+        return $this->quantity;
     }
 }
