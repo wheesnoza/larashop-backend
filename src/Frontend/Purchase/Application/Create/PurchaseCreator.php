@@ -4,7 +4,6 @@ namespace Src\Frontend\Purchase\Application\Create;
 
 use Exception;
 use Src\Frontend\Auth\Domain\CustomerAuthRepository;
-use Src\Frontend\Customer\Domain\CustomerUuid;
 use Src\Frontend\Purchase\Domain\Purchase;
 use Src\Frontend\Purchase\Domain\PurchasePriority;
 use Src\Frontend\Purchase\Domain\PurchaseQuantity;
@@ -45,7 +44,7 @@ final class PurchaseCreator
 
         $purchase = Purchase::create(
             PurchaseUuid::generate(),
-            new CustomerUuid('b5ac9ecb-7173-3f0f-8273-f09bcc0c9846'),
+            $this->customerAuthRepository->user()->uuid(),
             $variantUuid,
             PurchaseState::Reserved,
             PurchasePriority::from($attributes['priority']),
