@@ -39,7 +39,7 @@ final class Purchase extends DomainEventAggregateRoot
         PurchasePriority $priority,
         PurchaseQuantity $quantity
     ): self {
-        return new self(
+        $purchase = new self(
             $uuid,
             $customerUuid,
             $variantUuid,
@@ -47,6 +47,10 @@ final class Purchase extends DomainEventAggregateRoot
             $priority,
             $quantity
         );
+
+        $purchase->record(new PurchaseCreatedDomainEvent($purchase));
+
+        return $purchase;
     }
 
     public function uuid(): PurchaseUuid

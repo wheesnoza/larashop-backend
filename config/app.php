@@ -186,6 +186,7 @@ return [
          */
         \App\Frontend\Auth\Providers\AuthEventServiceProvider::class,
         \App\Frontend\Product\Providers\ProductEventServiceProvider::class,
+        \App\Frontend\Purchase\Providers\PurchaseEventServiceProvider::class,
 
     ],
 

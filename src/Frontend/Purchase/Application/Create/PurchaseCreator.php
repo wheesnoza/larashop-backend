@@ -4,6 +4,7 @@ namespace Src\Frontend\Purchase\Application\Create;
 
 use Exception;
 use Src\Frontend\Auth\Domain\CustomerAuthRepository;
+use Src\Frontend\Customer\Domain\CustomerUuid;
 use Src\Frontend\Purchase\Domain\Purchase;
 use Src\Frontend\Purchase\Domain\PurchasePriority;
 use Src\Frontend\Purchase\Domain\PurchaseQuantity;
@@ -28,7 +29,7 @@ final class PurchaseCreator
         PurchaseRepository $purchaseRepository,
         EventBus $eventBus,
         EnsureVariantStockRepository $ensureVariantStockRepository,
-        TransactionRepository $transactionRepository
+        TransactionRepository $transactionRepository,
     ) {
         $this->customerAuthRepository = $customerAuthRepository;
         $this->purchaseRepository = $purchaseRepository;
@@ -37,14 +38,14 @@ final class PurchaseCreator
         $this->transactionRepository = $transactionRepository;
     }
 
-    public function __invoke(array $attributes): Purchase
+    public function __invoke(array $attributes): ?Purchase
     {
         $variantUuid = new VariantUuid($attributes['variant_uuid']);
         $quantity = new PurchaseQuantity($attributes['quantity']);
 
         $purchase = Purchase::create(
             PurchaseUuid::generate(),
-            $this->customerAuthRepository->user()->uuid(),
+            new CustomerUuid('b5ac9ecb-7173-3f0f-8273-f09bcc0c9846'),
             $variantUuid,
             PurchaseState::Reserved,
             PurchasePriority::from($attributes['priority']),
@@ -65,6 +66,8 @@ final class PurchaseCreator
             $this->transactionRepository->commit();
         } catch (Exception $exception) {
             $this->transactionRepository->rollback();
+
+            return null;
         }
 
         $this->eventBus->publish(...$purchase->pullDomainEvents());
