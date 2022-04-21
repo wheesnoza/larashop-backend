@@ -2,72 +2,58 @@
 
 namespace Src\Frontend\Purchase\Application\Create;
 
-use Exception;
 use Src\Frontend\Auth\Domain\CustomerAuthRepository;
+use Src\Frontend\Customer\Domain\CustomerUuid;
+use Src\Frontend\Purchase\Domain\BuyRepository;
 use Src\Frontend\Purchase\Domain\Purchase;
 use Src\Frontend\Purchase\Domain\PurchasePriority;
 use Src\Frontend\Purchase\Domain\PurchaseQuantity;
 use Src\Frontend\Purchase\Domain\PurchaseRepository;
 use Src\Frontend\Purchase\Domain\PurchaseState;
 use Src\Frontend\Purchase\Domain\PurchaseUuid;
-use Src\Frontend\Variant\Domain\EnsureVariantStockRepository;
+use Src\Frontend\Variant\Domain\VariantRepository;
 use Src\Frontend\Variant\Domain\VariantUuid;
 use Src\Shared\Domain\Bus\Event\EventBus;
-use Src\Shared\Domain\Transaction\TransactionRepository;
 
 final class PurchaseCreator
 {
     private CustomerAuthRepository $customerAuthRepository;
-    private PurchaseRepository $purchaseRepository;
     private EventBus $eventBus;
-    private EnsureVariantStockRepository $ensureVariantStockRepository;
-    private TransactionRepository $transactionRepository;
+    private BuyRepository $buyRepository;
+    private PurchaseRepository $purchaseRepository;
+    private VariantRepository $variantRepository;
 
     public function __construct(
         CustomerAuthRepository $customerAuthRepository,
+        BuyRepository $buyRepository,
         PurchaseRepository $purchaseRepository,
         EventBus $eventBus,
-        EnsureVariantStockRepository $ensureVariantStockRepository,
-        TransactionRepository $transactionRepository,
+        VariantRepository $variantRepository
     ) {
         $this->customerAuthRepository = $customerAuthRepository;
-        $this->purchaseRepository = $purchaseRepository;
         $this->eventBus = $eventBus;
-        $this->ensureVariantStockRepository = $ensureVariantStockRepository;
-        $this->transactionRepository = $transactionRepository;
+        $this->buyRepository = $buyRepository;
+        $this->purchaseRepository = $purchaseRepository;
+        $this->variantRepository = $variantRepository;
     }
 
     public function __invoke(array $attributes): ?Purchase
     {
-        $variantUuid = new VariantUuid($attributes['variant_uuid']);
+        $variant = $this->variantRepository->find($attributes['variant_uuid']);
         $quantity = new PurchaseQuantity($attributes['quantity']);
 
         $purchase = Purchase::create(
             PurchaseUuid::generate(),
-            $this->customerAuthRepository->user()->uuid(),
-            $variantUuid,
+            new CustomerUuid('35680301-7d22-373b-84a3-7823999214bc'),
+            $variant->uuid(),
             PurchaseState::Reserved,
             PurchasePriority::from($attributes['priority']),
             $quantity
         );
 
-        $this->transactionRepository->begin();
-
-        try {
-            $stock = $this->ensureVariantStockRepository
-                ->ensure($variantUuid, $quantity);
-
-            $this->purchaseRepository
-                ->save($purchase);
-
-            $stock->reduce();
-
-            $this->transactionRepository->commit();
-        } catch (Exception $exception) {
-            $this->transactionRepository->rollback();
-
-            return null;
-        }
+        $this->buyRepository->buy($variant, $quantity, function () use ($purchase) {
+            $this->purchaseRepository->save($purchase);
+        });
 
         $this->eventBus->publish(...$purchase->pullDomainEvents());
 

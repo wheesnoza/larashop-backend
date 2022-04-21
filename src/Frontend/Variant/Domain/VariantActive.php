@@ -2,6 +2,8 @@
 
 namespace Src\Frontend\Variant\Domain;
 
-final class VariantActive
+use Src\Shared\Domain\ValueObject\BooleanValueObject;
+
+final class VariantActive extends BooleanValueObject
 {
 }

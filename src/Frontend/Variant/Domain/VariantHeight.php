@@ -2,6 +2,8 @@
 
 namespace Src\Frontend\Variant\Domain;
 
-final class VariantHeight
+use Src\Shared\Domain\ValueObject\FloatValueObject;
+
+final class VariantHeight extends FloatValueObject
 {
 }

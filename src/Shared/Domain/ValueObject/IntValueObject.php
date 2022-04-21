@@ -16,8 +16,12 @@ abstract class IntValueObject
         return $this->value;
     }
 
-    final public function isBiggerThan(IntValueObject $other): bool
+    final public function isBiggerThan(int|IntValueObject $other): bool
     {
-        return $this->value() > $other->value();
+        if ($other instanceof IntValueObject) {
+            return $this->value() > $other->value();
+        }
+
+        return $this->value() > $other;
     }
 }

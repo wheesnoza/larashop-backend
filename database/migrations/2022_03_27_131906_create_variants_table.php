@@ -24,7 +24,7 @@ return new class extends Migration
             $table->double('height');
             $table->double('width');
             $table->double('weight');
-            $table->double('active');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
