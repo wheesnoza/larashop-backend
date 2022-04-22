@@ -15,6 +15,7 @@ final class DatabaseSeeder extends Seeder
     {
         $this->call([
             CustomersTableSeeder::class,
+            AdministratorsTableSeeder::class,
             ProductsTableSeeder::class,
             PurchasesTableSeeder::class,
             CouponsTableSeeder::class,
