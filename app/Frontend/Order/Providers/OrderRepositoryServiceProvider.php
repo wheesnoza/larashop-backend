@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Frontend\Order\Providers;
 
@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Src\Frontend\Order\Domain\OrderRepository;
 use Src\Frontend\Order\Infrastructure\Persistence\EloquentOrderRepository;
 
-class OrderRepositoryServiceProvider extends ServiceProvider
+final class OrderRepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {

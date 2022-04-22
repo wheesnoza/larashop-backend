@@ -1,14 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Frontend\Order\Exceptions;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 use Src\Frontend\Variant\Domain\Variant;
 
-class NotEnoughStockException extends Exception
+final class NotEnoughStockException extends Exception
 {
     private Variant $variant;
 

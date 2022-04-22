@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Src\Frontend\Order\Infrastructure\Mailer;
 
@@ -9,7 +9,7 @@ use Src\Frontend\Customer\Domain\CustomerRepository;
 use Src\Frontend\Order\Application\Listener\SendOrderReceivedNotification;
 use Src\Frontend\Order\Domain\OrderCreatedDomainEvent;
 
-class LaravelMailerSendOrderReceivedNotification implements SendOrderReceivedNotification, ShouldQueue
+final class LaravelMailerSendOrderReceivedNotification implements SendOrderReceivedNotification, ShouldQueue
 {
     private CustomerRepository $customerRepository;
 

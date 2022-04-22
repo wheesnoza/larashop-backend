@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Src\Frontend\Stock\Infrastructure\Persistence;
 
@@ -7,7 +7,7 @@ use Src\Frontend\Purchase\Domain\OrderQuantity;
 use Src\Frontend\Stock\Domain\StockRepository;
 use Src\Frontend\Variant\Domain\Variant;
 
-class RedisStockRepository implements StockRepository
+final class RedisStockRepository implements StockRepository
 {
     private string $key;
     private OrderQuantity $quantity;

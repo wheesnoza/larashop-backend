@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Frontend\Coupon\Providers;
 
@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Src\Frontend\Coupon\Domain\CouponRepository;
 use Src\Frontend\Coupon\Infrastructure\Persistence\EloquentCouponRepository;
 
-class CouponRepositoryServiceProvider extends ServiceProvider
+final class CouponRepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
