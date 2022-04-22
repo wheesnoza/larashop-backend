@@ -3,14 +3,14 @@
 namespace Database\Seeders;
 
 use App\Shared\Models\Customer;
-use Database\Factories\PurchaseFactory;
+use Database\Factories\OrderFactory;
 use Illuminate\Database\Seeder;
 
 final class PurchasesTableSeeder extends Seeder
 {
     public function run()
     {
-        $factory = new PurchaseFactory();
+        $factory = new OrderFactory();
 
         $factory
             ->create([

@@ -181,14 +181,14 @@ return [
          */
         \App\Frontend\Product\Providers\ProductRepositoryServiceProvider::class,
         \App\Frontend\Auth\Providers\AuthRepositoryServiceProvider::class,
-        \App\Frontend\Purchase\Providers\PurchaseRepositoryServiceProvider::class,
+        \App\Frontend\Order\Providers\OrderRepositoryServiceProvider::class,
         \App\Frontend\Stock\Providers\StockRepositoryServiceProvider::class,
         /*
          * Event Service Providers...
          */
         \App\Frontend\Auth\Providers\AuthEventServiceProvider::class,
         \App\Frontend\Product\Providers\ProductEventServiceProvider::class,
-        \App\Frontend\Purchase\Providers\PurchaseEventServiceProvider::class,
+        \App\Frontend\Order\Providers\OrderEventServiceProvider::class,
 
     ],
 

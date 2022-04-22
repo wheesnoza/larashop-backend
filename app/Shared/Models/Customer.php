@@ -34,7 +34,7 @@ final class Customer extends Authenticatable
 
     public function purchases(): HasMany
     {
-        return $this->hasMany(Purchase::class);
+        return $this->hasMany(Order::class);
     }
 
     public function coupons(): BelongsToMany

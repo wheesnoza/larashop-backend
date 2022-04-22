@@ -3,16 +3,16 @@
 namespace Src\Frontend\Stock\Infrastructure\Persistence;
 
 use Illuminate\Support\Facades\Redis;
-use Src\Frontend\Purchase\Domain\PurchaseQuantity;
+use Src\Frontend\Purchase\Domain\OrderQuantity;
 use Src\Frontend\Stock\Domain\StockRepository;
 use Src\Frontend\Variant\Domain\Variant;
 
 class RedisStockRepository implements StockRepository
 {
     private string $key;
-    private PurchaseQuantity $quantity;
+    private OrderQuantity $quantity;
 
-    public function ensure(Variant $variant, PurchaseQuantity $quantity): StockRepository
+    public function ensure(Variant $variant, OrderQuantity $quantity): StockRepository
     {
         $this->key = "variant:{$variant->uuid()->value()}:stocks";
         $this->quantity = $quantity;

@@ -4,7 +4,7 @@ namespace Src\Frontend\Stock\Infrastructure\Persistence;
 
 use App\Shared\Models\Variant as EloquentModelVariant;
 use Illuminate\Database\Eloquent\Collection;
-use Src\Frontend\Purchase\Domain\PurchaseQuantity;
+use Src\Frontend\Purchase\Domain\OrderQuantity;
 use Src\Frontend\Stock\Domain\StockRepository;
 use Src\Frontend\Variant\Domain\Variant;
 
@@ -12,7 +12,7 @@ class EloquentStockRepository implements StockRepository
 {
     private Collection $stock;
 
-    public function ensure(Variant $variant, PurchaseQuantity $quantity): self
+    public function ensure(Variant $variant, OrderQuantity $quantity): self
     {
         $variantModel = EloquentModelVariant::firstWhere(
             'uuid',

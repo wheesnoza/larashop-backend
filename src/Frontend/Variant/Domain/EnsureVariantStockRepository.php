@@ -2,11 +2,11 @@
 
 namespace Src\Frontend\Variant\Domain;
 
-use Src\Frontend\Purchase\Domain\PurchaseQuantity;
+use Src\Frontend\Purchase\Domain\OrderQuantity;
 
 interface EnsureVariantStockRepository
 {
-    public function ensure(VariantUuid $variantUuid, PurchaseQuantity $quantity): self;
+    public function ensure(VariantUuid $variantUuid, OrderQuantity $quantity): self;
 
     public function reduce(): void;
 }
