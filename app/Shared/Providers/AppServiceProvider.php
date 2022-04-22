@@ -13,6 +13,9 @@ use Src\Frontend\Purchase\Domain\PurchaseRepository;
 use Src\Frontend\Purchase\Infrastructure\Persistence\EloquentBuyRepository;
 use Src\Frontend\Purchase\Infrastructure\Persistence\EloquentPurchaseRepository;
 use Src\Frontend\Purchase\Infrastructure\Persistence\RedisBuyRepository;
+use Src\Frontend\Stock\Domain\StockRepository;
+use Src\Frontend\Stock\Infrastructure\Persistence\EloquentStockRepository;
+use Src\Frontend\Stock\Infrastructure\Persistence\RedisStockRepository;
 use Src\Frontend\Variant\Domain\EnsureVariantStockRepository;
 use Src\Frontend\Variant\Domain\VariantRepository;
 use Src\Frontend\Variant\Infrastructure\Persistence\EloquentEnsureVariantStockRepository;
@@ -32,33 +35,8 @@ final class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            CouponRepository::class,
-            EloquentCouponRepository::class
-        );
-
-        $this->app->bind(
             TransactionRepository::class,
             LaravelTransactionRepository::class
-        );
-
-        $this->app->bind(
-            PurchaseRepository::class,
-            EloquentPurchaseRepository::class
-        );
-
-        $this->app->bind(
-            BuyRepository::class,
-            RedisBuyRepository::class,
-        );
-
-        $this->app->bind(
-            VariantRepository::class,
-            EloquentVariantRepository::class,
-        );
-
-        $this->app->bind(
-            EnsureVariantStockRepository::class,
-            EloquentEnsureVariantStockRepository::class
         );
 
         $this->app->bind(

@@ -5,6 +5,8 @@ namespace App\Frontend\Product\Providers;
 use Illuminate\Support\ServiceProvider;
 use Src\Frontend\Product\Domain\ProductRepository;
 use Src\Frontend\Product\Infrastructure\Persistence\EloquentProductRepository;
+use Src\Frontend\Variant\Domain\VariantRepository;
+use Src\Frontend\Variant\Infrastructure\Persistence\EloquentVariantRepository;
 
 final class ProductRepositoryServiceProvider extends ServiceProvider
 {
@@ -13,6 +15,10 @@ final class ProductRepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             ProductRepository::class,
             EloquentProductRepository::class
+        );
+        $this->app->bind(
+            VariantRepository::class,
+            EloquentVariantRepository::class,
         );
     }
 }

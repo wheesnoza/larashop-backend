@@ -181,6 +181,8 @@ return [
          */
         \App\Frontend\Product\Providers\ProductRepositoryServiceProvider::class,
         \App\Frontend\Auth\Providers\AuthRepositoryServiceProvider::class,
+        \App\Frontend\Purchase\Providers\PurchaseRepositoryServiceProvider::class,
+        \App\Frontend\Stock\Providers\StockRepositoryServiceProvider::class,
         /*
          * Event Service Providers...
          */
