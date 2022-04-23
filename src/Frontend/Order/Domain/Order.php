@@ -2,70 +2,70 @@
 
 namespace Src\Frontend\Order\Domain;
 
-use Src\Frontend\Customer\Domain\CustomerUuid;
-use Src\Frontend\Variant\Domain\VariantUuid;
+use Src\Frontend\Customer\Domain\CustomerId;
+use Src\Frontend\Variant\Domain\VariantId;
 use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
 
 final class Order extends DomainEventAggregateRoot
 {
-    private OrderUuid $uuid;
-    private CustomerUuid $customerUuid;
-    private VariantUuid $variantUuid;
+    private OrderId $id;
+    private CustomerId $customerId;
+    private VariantId $variantId;
     private OrderState $state;
     private OrderPriority $priority;
     private OrderQuantity $quantity;
 
     public function __construct(
-        OrderUuid     $uuid,
-        CustomerUuid  $customerUuid,
-        VariantUuid   $variantUuid,
+        OrderId       $id,
+        CustomerId    $customerId,
+        VariantId   $variantId,
         OrderState    $state,
         OrderPriority $priority,
         OrderQuantity $quantity
     ) {
-        $this->uuid = $uuid;
-        $this->customerUuid = $customerUuid;
-        $this->variantUuid = $variantUuid;
+        $this->id = $id;
+        $this->customerId = $customerId;
+        $this->variantId = $variantId;
         $this->state = $state;
         $this->priority = $priority;
         $this->quantity = $quantity;
     }
 
     public static function create(
-        OrderUuid     $uuid,
-        CustomerUuid  $customerUuid,
-        VariantUuid   $variantUuid,
+        OrderId       $id,
+        CustomerId    $customerId,
+        VariantId     $variantId,
         OrderState    $state,
         OrderPriority $priority,
         OrderQuantity $quantity
     ): self {
-        $purchase = new self(
-            $uuid,
-            $customerUuid,
-            $variantUuid,
+        $order = new self(
+            $id,
+            $customerId,
+            $variantId,
             $state,
             $priority,
             $quantity
         );
 
-        $purchase->record(new OrderCreatedDomainEvent($purchase));
+        $order->record(new OrderCreatedDomainEvent($order));
 
-        return $purchase;
+        return $order;
     }
 
-    public function uuid(): OrderUuid
+    public function id(): OrderId
     {
-        return $this->uuid;
+        return $this->id;
     }
 
-    public function customerUuid(): CustomerUuid
+    public function customerId(): CustomerId
     {
-        return $this->customerUuid;
+        return $this->customerId;
     }
 
-    public function variantUuid(): VariantUuid
+    public function variantId(): VariantId
     {
-        return $this->variantUuid;
+        return $this->variantId;
     }
 
     public function state(): OrderState
@@ -86,9 +86,9 @@ final class Order extends DomainEventAggregateRoot
     public function toPrimitives(): array
     {
         return [
-            'uuid' => $this->uuid->value(),
-            'customer_uuid' => $this->customerUuid->value(),
-            'variant_uuid' => $this->variantUuid->value(),
+            'id' => $this->id->value(),
+            'customer_id' => $this->customerId->value(),
+            'variant_id' => $this->variantId->value(),
             'state' => $this->state->value,
             'priority' => $this->priority->value,
             'quantity' => $this->quantity->value(),

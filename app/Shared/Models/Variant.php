@@ -5,20 +5,22 @@ namespace App\Shared\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Snowflake\SnowflakeCast;
 use Src\Frontend\Variant\Domain\Variant as DomainVariant;
 use Src\Frontend\Variant\Domain\VariantActive;
 use Src\Frontend\Variant\Domain\VariantColor;
 use Src\Frontend\Variant\Domain\VariantHeight;
 use Src\Frontend\Variant\Domain\VariantName;
 use Src\Frontend\Variant\Domain\VariantPrice;
-use Src\Frontend\Variant\Domain\VariantUuid;
+use Src\Frontend\Variant\Domain\VariantId;
 use Src\Frontend\Variant\Domain\VariantWeight;
 use Src\Frontend\Variant\Domain\VariantWidth;
 
 final class Variant extends Model
 {
     protected $fillable = [
-        'uuid',
+        'id',
+        'product_id',
         'name',
         'price',
         'color',
@@ -28,12 +30,9 @@ final class Variant extends Model
         'active',
     ];
 
-    protected $hidden = [
-        'id',
-        'product_id',
-    ];
-
     protected $casts = [
+        'id' => SnowflakeCast::class,
+        'product_id' => SnowflakeCast::class,
         'active' => 'bool'
     ];
 
@@ -47,10 +46,15 @@ final class Variant extends Model
         return $this->hasMany(Stock::class);
     }
 
+    public function getIncrementing(): bool
+    {
+        return false;
+    }
+
     public function toDomain(): DomainVariant
     {
         return new DomainVariant(
-            new VariantUuid($this->uuid),
+            new VariantId($this->id),
             new VariantName($this->name),
             new VariantPrice($this->price),
             new VariantColor($this->color),

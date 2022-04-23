@@ -4,7 +4,7 @@ namespace Src\Frontend\Variant\Domain;
 
 final class Variant
 {
-    private VariantUuid $uuid;
+    private VariantId $id;
     private VariantName $name;
     private VariantPrice $price;
     private VariantColor $color;
@@ -14,16 +14,16 @@ final class Variant
     private VariantActive $active;
 
     public function __construct(
-        VariantUuid $uuid,
-        VariantName $name,
-        VariantPrice $price,
-        VariantColor $color,
+        VariantId     $id,
+        VariantName   $name,
+        VariantPrice  $price,
+        VariantColor  $color,
         VariantHeight $height,
-        VariantWidth $width,
+        VariantWidth  $width,
         VariantWeight $weight,
         VariantActive $active
     ) {
-        $this->uuid = $uuid;
+        $this->id = $id;
         $this->name = $name;
         $this->price = $price;
         $this->color = $color;
@@ -34,21 +34,21 @@ final class Variant
     }
 
     public static function create(
-        VariantUuid $uuid,
-        VariantName $name,
-        VariantPrice $price,
-        VariantColor $color,
+        VariantId     $id,
+        VariantName   $name,
+        VariantPrice  $price,
+        VariantColor  $color,
         VariantHeight $height,
-        VariantWidth $width,
+        VariantWidth  $width,
         VariantWeight $weight,
         VariantActive $active
     ): self {
-        return new self($uuid, $name, $price, $color, $height, $width, $weight, $active);
+        return new self($id, $name, $price, $color, $height, $width, $weight, $active);
     }
 
-    public function uuid(): VariantUuid
+    public function id(): VariantId
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     public function name(): VariantName

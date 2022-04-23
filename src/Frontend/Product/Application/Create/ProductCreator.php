@@ -6,7 +6,7 @@ use Src\Frontend\Product\Domain\Product;
 use Src\Frontend\Product\Domain\ProductDescription;
 use Src\Frontend\Product\Domain\ProductName;
 use Src\Frontend\Product\Domain\ProductRepository;
-use Src\Frontend\Product\Domain\ProductUuid;
+use Src\Frontend\Product\Domain\ProductId;
 use Src\Shared\Domain\Bus\Event\EventBus;
 
 final class ProductCreator
@@ -23,7 +23,7 @@ final class ProductCreator
     public function __invoke(array $attributes): Product
     {
         $product = Product::create(
-            ProductUuid::generate(),
+            ProductId::generate(),
             new ProductName($attributes['name']),
             new ProductDescription($attributes['description'])
         );

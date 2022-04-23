@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stocks', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('variant_id')->index();
+            $table->snowflake()->primary();
+            $table->foreignSnowflake('variant_id')
+                ->constrained();
             $table->timestamps();
         });
     }

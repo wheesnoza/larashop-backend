@@ -7,7 +7,7 @@ namespace Src\Frontend\Customer\Infrastructure\Persistence;
 use App\Shared\Models\Customer as EloquentModelCustomer;
 use Src\Frontend\Customer\Domain\Customer;
 use Src\Frontend\Customer\Domain\CustomerRepository;
-use Src\Frontend\Customer\Domain\CustomerUuid;
+use Src\Frontend\Customer\Domain\CustomerId;
 
 final class EloquentCustomerRepository implements CustomerRepository
 {
@@ -15,14 +15,14 @@ final class EloquentCustomerRepository implements CustomerRepository
     {
         EloquentModelCustomer::updateOrCreate(
             [
-                'uuid' => $customer->uuid()->value()
+                'id' => $customer->id()->value()
             ],
             $customer->toPrimitives()
         );
     }
 
-    public function find(CustomerUuid $uuid): ?Customer
+    public function find(CustomerId $id): ?Customer
     {
-        return EloquentModelCustomer::firstWhere('uuid', $uuid)?->toDomain();
+        return EloquentModelCustomer::find($id)?->toDomain();
     }
 }

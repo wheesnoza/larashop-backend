@@ -6,26 +6,26 @@ use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
 
 final class Product extends DomainEventAggregateRoot
 {
-    private ProductUuid $uuid;
+    private ProductId $id;
     private ProductName $name;
     private ProductDescription $description;
 
     public function __construct(
-        ProductUuid $uuid,
-        ProductName $name,
+        ProductId          $id,
+        ProductName        $name,
         ProductDescription $description
     ) {
-        $this->uuid = $uuid;
+        $this->id = $id;
         $this->name = $name;
         $this->description = $description;
     }
 
     public static function create(
-        ProductUuid $uuid,
-        ProductName $name,
+        ProductId          $id,
+        ProductName        $name,
         ProductDescription $description
     ): self {
-        $product = new self($uuid, $name, $description);
+        $product = new self($id, $name, $description);
 
         $product->record(new ProductCreatedDomainEvent($product));
 
@@ -33,11 +33,11 @@ final class Product extends DomainEventAggregateRoot
     }
 
     /**
-     * @return ProductUuid
+     * @return ProductId
      */
-    public function uuid(): ProductUuid
+    public function id(): ProductId
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     /**
@@ -59,7 +59,7 @@ final class Product extends DomainEventAggregateRoot
     public function toPrimitives(): array
     {
         return [
-            'uuid' => $this->uuid()->value(),
+            'id' => $this->id()->value(),
             'name' => $this->name()->value(),
             'description' => $this->description()->value(),
         ];

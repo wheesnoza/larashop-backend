@@ -12,6 +12,7 @@ final class StockFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => snowflake(),
             'variant_id' => new VariantFactory(),
         ];
     }

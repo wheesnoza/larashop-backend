@@ -14,10 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('variants', function (Blueprint $table) {
-            $table->id();
-            $table->uuid()
-                ->unique();
-            $table->unsignedBigInteger('product_id');
+            $table->snowflake()->primary();
+            $table->foreignSnowflake('product_id')
+                ->constrained();
             $table->string('name');
             $table->integer('price');
             $table->string('color');

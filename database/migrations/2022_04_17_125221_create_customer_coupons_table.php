@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customer_coupons', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('customer_id')
+            $table->snowflake()->primary();
+            $table->foreignSnowflake('customer_id')
                 ->constrained();
-            $table->foreignId('coupon_id')
+            $table->foreignSnowflake('coupon_id')
                 ->constrained();
             $table->dateTime('expire_at');
             $table->timestamps();

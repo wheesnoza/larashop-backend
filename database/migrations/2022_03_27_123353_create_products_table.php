@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->uuid()->unique();
+            $table->snowflake()->primary();
             $table->string('name');
             $table->text('description')
                 ->nullable();

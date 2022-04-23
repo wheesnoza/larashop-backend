@@ -12,7 +12,7 @@ final class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => $this->faker->unique()->uuid(),
+            'id' => snowflake(),
             'name' => $this->faker->sentence(),
             'description' => $this->faker->text(),
         ];

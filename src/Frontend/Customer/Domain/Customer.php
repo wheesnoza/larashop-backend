@@ -8,20 +8,20 @@ use Src\Shared\Domain\Aggregate\DomainEventAggregateRoot;
 
 final class Customer extends DomainEventAggregateRoot
 {
-    private CustomerUuid $uuid;
+    private CustomerId $id;
     private CustomerEmail $email;
     private CustomerPassword $password;
     private CustomerFirstName $firstName;
     private CustomerLastName $lastName;
 
     public function __construct(
-        CustomerUuid $uuid,
-        CustomerEmail $email,
-        CustomerPassword $password,
+        CustomerId        $id,
+        CustomerEmail     $email,
+        CustomerPassword  $password,
         CustomerFirstName $firstName,
-        CustomerLastName $lastName
+        CustomerLastName  $lastName
     ) {
-        $this->uuid = $uuid;
+        $this->id = $id;
         $this->email = $email;
         $this->password = $password;
         $this->firstName = $firstName;
@@ -29,22 +29,22 @@ final class Customer extends DomainEventAggregateRoot
     }
 
     public static function create(
-        CustomerUuid $uuid,
-        CustomerEmail $email,
-        CustomerPassword $password,
+        CustomerId        $id,
+        CustomerEmail     $email,
+        CustomerPassword  $password,
         CustomerFirstName $firstName,
-        CustomerLastName $lastName
+        CustomerLastName  $lastName
     ): self {
-        $customer = new self($uuid, $email, $password, $firstName, $lastName);
+        $customer = new self($id, $email, $password, $firstName, $lastName);
 
         $customer->record(new CustomerCreatedDomainEvent($customer));
 
         return $customer;
     }
 
-    public function uuid(): CustomerUuid
+    public function id(): CustomerId
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     public function email(): CustomerEmail
@@ -79,7 +79,7 @@ final class Customer extends DomainEventAggregateRoot
     public function toPrimitives(): array
     {
         return [
-            'uuid' => $this->uuid()->value(),
+            'id' => $this->id()->value(),
             'email' => $this->email()->value(),
             'password' => $this->password()->value(),
             'first_name' => $this->firstName()->value(),

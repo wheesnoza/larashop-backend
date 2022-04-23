@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('coupons', function (Blueprint $table) {
-            $table->id();
+            $table->snowflake()->primary();
             $table->string('code', 6);
             $table->string('title');
             $table->string('description')->nullable();

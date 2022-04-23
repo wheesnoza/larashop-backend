@@ -6,7 +6,7 @@ namespace Tests\Frontend\Product\Infrastructure\Persistence;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Frontend\Product\Domain\ProductMother;
-use Tests\Frontend\Product\Domain\ProductUuidMother;
+use Tests\Frontend\Product\Domain\ProductIdMother;
 use Tests\Frontend\Product\ProductModuleInfrastructureTestCase;
 
 final class ProductRepositoryTest extends ProductModuleInfrastructureTestCase
@@ -28,12 +28,12 @@ final class ProductRepositoryTest extends ProductModuleInfrastructureTestCase
 
         $this->repository()->save($product);
 
-        $this->assertEquals($product, $this->repository()->find($product->uuid()));
+        $this->assertEquals($product, $this->repository()->find($product->id()));
     }
 
 
     public function test_should_return_null_when_product_no_exists(): void
     {
-        $this->assertNull($this->repository()->find(ProductUuidMother::create()));
+        $this->assertNull($this->repository()->find(ProductIdMother::create()));
     }
 }

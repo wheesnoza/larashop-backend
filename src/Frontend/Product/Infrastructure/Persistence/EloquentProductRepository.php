@@ -7,7 +7,7 @@ namespace Src\Frontend\Product\Infrastructure\Persistence;
 use App\Shared\Models\Product as EloquentModelProduct;
 use Src\Frontend\Product\Domain\Product;
 use Src\Frontend\Product\Domain\ProductRepository;
-use Src\Frontend\Product\Domain\ProductUuid;
+use Src\Frontend\Product\Domain\ProductId;
 
 final class EloquentProductRepository implements ProductRepository
 {
@@ -15,14 +15,15 @@ final class EloquentProductRepository implements ProductRepository
     {
         EloquentModelProduct::updateOrCreate(
             [
-                'uuid' => $product->uuid()->value()
+                'id' => $product->id()->value()
             ],
             $product->toPrimitives()
         );
     }
 
-    public function find(string|ProductUuid $uuid): ?Product
+    public function find(ProductId $id): ?Product
     {
-        return EloquentModelProduct::firstWhere('uuid', $uuid)?->toDomain();
+        return EloquentModelProduct::find($id)
+            ?->toDomain();
     }
 }

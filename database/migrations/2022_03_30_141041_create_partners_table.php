@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('partners', function (Blueprint $table) {
-            $table->id();
-            $table->uuid()->unique();
+            $table->snowflake()->primary();
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->string('first_name')->nullable();

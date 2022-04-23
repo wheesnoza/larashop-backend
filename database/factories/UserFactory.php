@@ -13,6 +13,7 @@ final class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => snowflake(),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),

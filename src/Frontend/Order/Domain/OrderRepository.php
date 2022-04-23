@@ -6,5 +6,5 @@ interface OrderRepository
 {
     public function save(Order $purchase): void;
 
-    public function find(string|OrderUuid $uuid): ?Order;
+    public function find(OrderId $id): ?Order;
 }

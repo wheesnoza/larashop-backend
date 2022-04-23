@@ -7,7 +7,7 @@ namespace Tests\Frontend\Customer\Infrastructure\Persistence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Frontend\Customer\CustomerModuleInfrastructureTestCase;
 use Tests\Frontend\Customer\Domain\CustomerMother;
-use Tests\Frontend\Customer\Domain\CustomerUuidMother;
+use Tests\Frontend\Customer\Domain\CustomerIdMother;
 
 final class CustomerRepositoryTest extends CustomerModuleInfrastructureTestCase
 {
@@ -28,12 +28,12 @@ final class CustomerRepositoryTest extends CustomerModuleInfrastructureTestCase
 
         $this->repository()->save($customer);
 
-        $this->assertEquals($customer, $this->repository()->find($customer->uuid()));
+        $this->assertEquals($customer, $this->repository()->find($customer->id()));
     }
 
 
     public function test_should_not_return_a_non_existing_customer(): void
     {
-        $this->assertNull($this->repository()->find(CustomerUuidMother::create()));
+        $this->assertNull($this->repository()->find(CustomerIdMother::create()));
     }
 }

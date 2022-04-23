@@ -19,11 +19,11 @@ abstract class OrderModuleInfrastructureTestCase extends TestCase
         return $this->repository =  $this->repository ?? app(OrderRepository::class);
     }
 
-    protected function shouldSave(Order $purchase)
+    protected function shouldSave(Order $order)
     {
-        (new VariantFactory())->create(['uuid' => $purchase->variantUuid()]);
-        (new CustomerFactory())->create(['uuid' => $purchase->customerUuid()]);
+        (new VariantFactory())->create(['id' => $order->variantId()->value()]);
+        (new CustomerFactory())->create(['id' => $order->customerId()->value()]);
 
-        $this->repository()->save($purchase);
+        $this->repository()->save($order);
     }
 }

@@ -12,7 +12,7 @@ final class PartnerFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => $this->faker->unique()->uuid(),
+            'id' => snowflake(),
             'email' => $this->faker->email(),
             'password' => $this->faker->password(),
             'first_name' => $this->faker->firstName(),

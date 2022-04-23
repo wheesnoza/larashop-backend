@@ -12,6 +12,7 @@ final class CustomerCouponFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => snowflake(),
             'customer_id' => new CustomerFactory(),
             'coupon_id' => new CouponFactory(),
             'expire_at' => now()->addDays(5),

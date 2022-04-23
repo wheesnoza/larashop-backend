@@ -8,5 +8,5 @@ interface CustomerRepository
 {
     public function save(Customer $customer): void;
 
-    public function find(CustomerUuid $uuid): ?Customer;
+    public function find(CustomerId $id): ?Customer;
 }

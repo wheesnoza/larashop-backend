@@ -11,7 +11,7 @@ use Src\Frontend\Customer\Domain\CustomerFirstName;
 use Src\Frontend\Customer\Domain\CustomerLastName;
 use Src\Frontend\Customer\Domain\CustomerPassword;
 use Src\Frontend\Customer\Domain\CustomerRepository;
-use Src\Frontend\Customer\Domain\CustomerUuid;
+use Src\Frontend\Customer\Domain\CustomerId;
 use Src\Shared\Domain\Bus\Event\EventBus;
 use Src\Shared\Domain\Transaction\TransactionRepository;
 
@@ -31,7 +31,7 @@ final class CustomerCreator
     public function __invoke(array $attributes): Customer
     {
         $customer = Customer::create(
-            CustomerUuid::generate(),
+            CustomerId::generate(),
             new CustomerEmail($attributes['email']),
             new CustomerPassword($attributes['password']),
             new CustomerFirstName($attributes['first_name']),

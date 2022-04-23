@@ -5,13 +5,13 @@ namespace Src\Frontend\Variant\Infrastructure\Persistence;
 use App\Shared\Models\Variant as EloquentModelVariant;
 use Src\Frontend\Variant\Domain\Variant;
 use Src\Frontend\Variant\Domain\VariantRepository;
-use Src\Frontend\Variant\Domain\VariantUuid;
+use Src\Frontend\Variant\Domain\VariantId;
 
 final class EloquentVariantRepository implements VariantRepository
 {
-    public function find(string|VariantUuid $uuid): Variant
+    public function find(VariantId $id): Variant
     {
-        return EloquentModelVariant::firstWhere('uuid', $uuid)
+        return EloquentModelVariant::find($id)
             ?->toDomain();
     }
 }

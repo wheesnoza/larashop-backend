@@ -5,39 +5,29 @@ namespace Src\Frontend\Order\Infrastructure\Persistence;
 use Src\Frontend\Order\Domain\Order;
 use Src\Frontend\Order\Domain\OrderRepository;
 use App\Shared\Models\Order as EloquentModelPurchase;
-use App\Shared\Models\Customer as EloquentModelCustomer;
-use App\Shared\Models\Variant as EloquentModelVariant;
-use Src\Frontend\Order\Domain\OrderUuid;
+use Src\Frontend\Order\Domain\OrderId;
 
 final class EloquentOrderRepository implements OrderRepository
 {
-    public function save(Order $purchase): void
+    public function save(Order $order): void
     {
         EloquentModelPurchase::updateOrCreate(
             [
-                'uuid' => $purchase->uuid()
+                'id' => $order->id()->value()
             ],
             [
-                'customer_id' => EloquentModelCustomer::firstWhere(
-                    'uuid',
-                    $purchase->customerUuid()
-                )->id,
-                'variant_id' => EloquentModelVariant::firstWhere(
-                    'uuid',
-                    $purchase->variantUuid()
-                )->id,
-                'state' => $purchase->state(),
-                'priority' => $purchase->priority(),
-                'quantity' => $purchase->quantity()->value(),
+                'customer_id' => $order->customerId()->value(),
+                'variant_id' => $order->variantId()->value(),
+                'state' => $order->state(),
+                'priority' => $order->priority(),
+                'quantity' => $order->quantity()->value(),
             ]
         );
     }
 
-    public function find(string|OrderUuid $uuid): ?Order
+    public function find(OrderId $id): ?Order
     {
-        return EloquentModelPurchase::firstWhere(
-            'uuid',
-            $uuid
-        )?->toDomain();
+        return EloquentModelPurchase::find($id->value())
+            ?->toDomain();
     }
 }

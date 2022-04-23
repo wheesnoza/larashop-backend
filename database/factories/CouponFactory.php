@@ -14,6 +14,7 @@ final class CouponFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => snowflake(),
             'code' => Str::random(6),
             'title' => $this->faker->sentence(),
             'description' => $this->faker->text(),

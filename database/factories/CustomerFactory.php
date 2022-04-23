@@ -13,7 +13,7 @@ final class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => $this->faker->unique()->uuid(),
+            'id' => snowflake(),
             'email' => $this->faker->unique()->email(),
             'password' => Hash::make('password'),
             'first_name' => $this->faker->firstName(),

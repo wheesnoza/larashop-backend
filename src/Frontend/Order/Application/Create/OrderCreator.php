@@ -8,8 +8,8 @@ use Src\Frontend\Order\Domain\Order;
 use Src\Frontend\Order\Domain\OrderPriority;
 use Src\Frontend\Order\Domain\OrderQuantity;
 use Src\Frontend\Order\Domain\OrderState;
-use Src\Frontend\Order\Domain\OrderUuid;
-use Src\Frontend\Variant\Domain\VariantUuid;
+use Src\Frontend\Order\Domain\OrderId;
+use Src\Frontend\Variant\Domain\VariantId;
 use Src\Shared\Domain\Bus\Event\EventBus;
 
 final class OrderCreator
@@ -31,9 +31,9 @@ final class OrderCreator
     public function __invoke(array $attributes): Order
     {
         $order = Order::create(
-            OrderUuid::generate(),
+            OrderId::generate(),
             $this->customerAuthRepository->user()->uuid(),
-            new VariantUuid($attributes['variant_uuid']),
+            new VariantId($attributes['variant_uuid']),
             OrderState::Reserved,
             OrderPriority::from($attributes['priority']),
             new OrderQuantity($attributes['quantity'])

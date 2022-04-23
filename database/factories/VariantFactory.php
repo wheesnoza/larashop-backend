@@ -12,8 +12,8 @@ final class VariantFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => snowflake(),
             'product_id' => new ProductFactory(),
-            'uuid' => $this->faker->unique()->uuid(),
             'name' => $this->faker->sentence(),
             'price' => $this->faker->randomNumber(),
             'color' => $this->faker->randomElement(['red', 'blue']),

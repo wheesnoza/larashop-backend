@@ -9,19 +9,19 @@ use Src\Frontend\Customer\Domain\CustomerEmail;
 use Src\Frontend\Customer\Domain\CustomerFirstName;
 use Src\Frontend\Customer\Domain\CustomerLastName;
 use Src\Frontend\Customer\Domain\CustomerPassword;
-use Src\Frontend\Customer\Domain\CustomerUuid;
+use Src\Frontend\Customer\Domain\CustomerId;
 
 final class CustomerMother
 {
     public static function create(
-        ?CustomerUuid $uuid = null,
-        ?CustomerEmail $email = null,
-        ?CustomerPassword $password = null,
+        ?CustomerId        $uuid = null,
+        ?CustomerEmail     $email = null,
+        ?CustomerPassword  $password = null,
         ?CustomerFirstName $firstName = null,
-        ?CustomerLastName $lastName = null
+        ?CustomerLastName  $lastName = null
     ): Customer {
         return new Customer(
-            $uuid ?? CustomerUuidMother::create(),
+            $uuid ?? CustomerIdMother::create(),
             $email ?? CustomerEmailMother::create(),
             $password ?? CustomerPasswordMother::create(),
             $firstName ?? CustomerFirstNameMother::create(),

@@ -14,13 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('customer_id')
+            $table->snowflake()->primary();
+            $table->foreignSnowflake('customer_id')
                 ->constrained();
-            $table->foreignId('variant_id')
+            $table->foreignSnowflake('variant_id')
                 ->constrained();
-            $table->uuid()
-                ->unique();
             $table->tinyInteger('state');
             $table->tinyInteger('priority');
             $table->tinyInteger('quantity');

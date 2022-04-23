@@ -14,9 +14,9 @@ final class OrderFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => snowflake(),
             'customer_id' => new CustomerFactory(),
             'variant_id' => new VariantFactory(),
-            'uuid' => $this->faker->unique()->uuid(),
             'state' => $this->faker->randomElement(OrderState::cases())->value,
             'priority' => $this->faker->randomElement(OrderPriority::cases())->value,
             'quantity' => $this->faker->numberBetween(1, 5),
