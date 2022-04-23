@@ -2,7 +2,7 @@
 
 namespace Src\Frontend\Order\Application\Listener;
 
-use Src\Frontend\Purchase\Domain\OrderCreatedDomainEvent;
+use Src\Frontend\Order\Domain\OrderCreatedDomainEvent;
 
 interface SendOrderReceivedNotification
 {
