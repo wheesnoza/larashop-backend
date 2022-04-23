@@ -10,9 +10,8 @@ final class EloquentStockCountRepository implements StockCountRepository
 {
     public function __invoke(Variant $variant): int
     {
-        return EloquentModelVariant::firstWhere(
-            'uuid',
-            $variant->uuid()
+        return EloquentModelVariant::find(
+            $variant->id()
         )
         ->stock()
         ->count();

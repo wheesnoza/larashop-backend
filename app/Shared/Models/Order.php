@@ -2,10 +2,10 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Snowflake\SnowflakeCast;
 use Src\Frontend\Customer\Domain\CustomerId;
 use Src\Frontend\Order\Domain\OrderPriority;
 use Src\Frontend\Order\Domain\OrderQuantity;
@@ -26,9 +26,9 @@ final class Order extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
-        'customer_id' => SnowflakeCast::class,
-        'variant_id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
+        'customer_id' => SnowflakeId::class,
+        'variant_id' => SnowflakeId::class,
         'state' => OrderState::class,
         'priority' => OrderPriority::class,
     ];

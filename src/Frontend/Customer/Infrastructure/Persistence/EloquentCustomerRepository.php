@@ -15,7 +15,7 @@ final class EloquentCustomerRepository implements CustomerRepository
     {
         EloquentModelCustomer::updateOrCreate(
             [
-                'id' => $customer->id()->value()
+                'id' => $customer->id()
             ],
             $customer->toPrimitives()
         );
@@ -23,6 +23,7 @@ final class EloquentCustomerRepository implements CustomerRepository
 
     public function find(CustomerId $id): ?Customer
     {
-        return EloquentModelCustomer::find($id)?->toDomain();
+        return EloquentModelCustomer::find($id)
+            ?->toDomain();
     }
 }

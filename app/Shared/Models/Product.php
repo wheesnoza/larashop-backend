@@ -2,9 +2,9 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Snowflake\SnowflakeCast;
 use Src\Frontend\Product\Domain\Product as DomainProduct;
 use Src\Frontend\Product\Domain\ProductDescription;
 use Src\Frontend\Product\Domain\ProductName;
@@ -19,7 +19,7 @@ final class Product extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
     ];
 
     public function variants(): HasMany

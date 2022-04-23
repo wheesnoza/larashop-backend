@@ -2,10 +2,10 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Snowflake\SnowflakeCast;
 use Src\Frontend\Variant\Domain\Variant as DomainVariant;
 use Src\Frontend\Variant\Domain\VariantActive;
 use Src\Frontend\Variant\Domain\VariantColor;
@@ -31,8 +31,8 @@ final class Variant extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
-        'product_id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
+        'product_id' => SnowflakeId::class,
         'active' => 'bool'
     ];
 

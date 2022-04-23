@@ -26,14 +26,14 @@ abstract class SnowflakeId implements Stringable
         return $this->value;
     }
 
+    public function __toString(): string
+    {
+        return $this->value;
+    }
+
     final public function equals(Uuid $other): bool
     {
         return $this->value() === $other->value();
-    }
-
-    public function __toString(): string
-    {
-        return (string) $this->value;
     }
 
     private function ensureIsValid(string $value): void

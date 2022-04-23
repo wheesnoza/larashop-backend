@@ -2,8 +2,8 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Model;
-use Snowflake\SnowflakeCast;
 
 final class Partner extends Model
 {
@@ -16,7 +16,7 @@ final class Partner extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
     ];
 
     public function getIncrementing(): bool

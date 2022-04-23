@@ -2,8 +2,8 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Model;
-use Snowflake\SnowflakeCast;
 
 final class CustomerCoupon extends Model
 {
@@ -15,9 +15,9 @@ final class CustomerCoupon extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
-        'customer_id' => SnowflakeCast::class,
-        'coupon_id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
+        'customer_id' => SnowflakeId::class,
+        'coupon_id' => SnowflakeId::class,
     ];
 
     public function getIncrementing(): bool

@@ -13,11 +13,11 @@ final class EloquentOrderRepository implements OrderRepository
     {
         EloquentModelPurchase::updateOrCreate(
             [
-                'id' => $order->id()->value()
+                'id' => $order->id()
             ],
             [
-                'customer_id' => $order->customerId()->value(),
-                'variant_id' => $order->variantId()->value(),
+                'customer_id' => $order->customerId(),
+                'variant_id' => $order->variantId(),
                 'state' => $order->state(),
                 'priority' => $order->priority(),
                 'quantity' => $order->quantity()->value(),
@@ -27,7 +27,7 @@ final class EloquentOrderRepository implements OrderRepository
 
     public function find(OrderId $id): ?Order
     {
-        return EloquentModelPurchase::find($id->value())
+        return EloquentModelPurchase::find($id)
             ?->toDomain();
     }
 }

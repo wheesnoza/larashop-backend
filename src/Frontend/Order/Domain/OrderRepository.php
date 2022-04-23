@@ -4,7 +4,7 @@ namespace Src\Frontend\Order\Domain;
 
 interface OrderRepository
 {
-    public function save(Order $purchase): void;
+    public function save(Order $order): void;
 
     public function find(OrderId $id): ?Order;
 }

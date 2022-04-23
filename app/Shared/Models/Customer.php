@@ -2,13 +2,13 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Snowflake\SnowflakeCast;
 use Src\Frontend\Customer\Domain\Customer as DomainCustomer;
 use Src\Frontend\Customer\Domain\CustomerEmail;
 use Src\Frontend\Customer\Domain\CustomerFirstName;
@@ -34,7 +34,7 @@ final class Customer extends Authenticatable
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
     ];
 
     public function purchases(): HasMany

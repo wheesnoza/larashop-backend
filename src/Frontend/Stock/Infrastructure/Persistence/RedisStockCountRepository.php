@@ -10,6 +10,6 @@ final class RedisStockCountRepository implements StockCountRepository
 {
     public function __invoke(Variant $variant): int
     {
-        return (int) Redis::get("variant:{$variant->uuid()->value()}:stocks");
+        return (int) Redis::get("variant:{$variant->id()}:stocks");
     }
 }

@@ -14,7 +14,7 @@ final class EloquentBuyRepository implements BuyRepository
     public function buy(Order $order)
     {
         DB::transaction(function () use ($order) {
-            $stock = Stock::where('variant_id', $order->variantid())
+            $stock = Stock::where('variant_id', $order->variantId())
                 ->limit($order->quantity()->value())
                 ->lockForUpdate()
                 ->count();

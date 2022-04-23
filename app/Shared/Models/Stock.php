@@ -2,9 +2,9 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Snowflake\SnowflakeCast;
 
 final class Stock extends Model
 {
@@ -14,8 +14,8 @@ final class Stock extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
-        'variant_id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
+        'variant_id' => SnowflakeId::class,
     ];
 
     public function variant(): BelongsTo

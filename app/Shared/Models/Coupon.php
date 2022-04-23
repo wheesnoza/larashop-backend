@@ -2,9 +2,9 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Snowflake\SnowflakeCast;
 use Src\Frontend\Coupon\Domain\CouponType;
 
 final class Coupon extends Model
@@ -21,7 +21,7 @@ final class Coupon extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
         'type' => CouponType::class,
         'content' => 'json',
     ];

@@ -2,8 +2,8 @@
 
 namespace App\Shared\Models;
 
+use App\Shared\Casts\SnowflakeId;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Snowflake\SnowflakeCast;
 
 final class Administrator extends Authenticatable
 {
@@ -18,7 +18,7 @@ final class Administrator extends Authenticatable
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
+        'id' => SnowflakeId::class,
     ];
 
     public function getIncrementing(): bool

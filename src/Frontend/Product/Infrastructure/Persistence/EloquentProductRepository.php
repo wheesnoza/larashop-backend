@@ -15,7 +15,7 @@ final class EloquentProductRepository implements ProductRepository
     {
         EloquentModelProduct::updateOrCreate(
             [
-                'id' => $product->id()->value()
+                'id' => $product->id()
             ],
             $product->toPrimitives()
         );
