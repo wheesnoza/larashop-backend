@@ -4,7 +4,7 @@ namespace Src\Frontend\Stock\Domain;
 
 use Src\Frontend\Variant\Domain\Variant;
 
-interface StockRepository
+interface StockCountRepository
 {
-    public function count(Variant $variant): int;
+    public function __invoke(Variant $variant): int;
 }
