@@ -2,6 +2,7 @@
 
 namespace App\Shared\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,6 +41,13 @@ final class Customer extends Authenticatable
     public function coupons(): BelongsToMany
     {
         return $this->belongsToMany(Coupon::class, (new CustomerCoupon())->getTable());
+    }
+
+    public function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => sprintf("%s %s", $this->last_name, $this->first_name)
+        );
     }
 
     public function toDomain(): DomainCustomer

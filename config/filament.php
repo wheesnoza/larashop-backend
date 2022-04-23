@@ -125,7 +125,11 @@ return [
     'resources' => [
         'namespace' => 'App\\Filament\\Resources',
         'path' => app_path('Filament/Resources'),
-        'register' => [],
+        'register' => [
+            \App\Backend\Order\OrderResource::class,
+            \App\Backend\Product\ProductResource::class,
+            \App\Backend\Customer\CustomerResource::class,
+        ],
     ],
 
     /*

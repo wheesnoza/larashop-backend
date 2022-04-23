@@ -1,23 +1,30 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Filament\Resources;
+namespace App\Backend\Product;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers\VariantsRelationManager;
 use App\Shared\Models\Product;
 use Filament\Forms\Components\HasManyRepeater;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 
-class ProductResource extends Resource
+final class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    public static function getLabel(): string
+    {
+        return __('product.self');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('product.self');
+    }
 
     public static function form(Form $form): Form
     {
@@ -59,8 +66,8 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label(__('product.id')),
-                Tables\Columns\TextColumn::make('uuid')->label(__('product.uuid')),
-                Tables\Columns\TextColumn::make('name')->label(__('product.name')),
+                Tables\Columns\TextColumn::make('uuid')->label(__('product.uuid'))->limit(8),
+                Tables\Columns\TextColumn::make('name')->label(__('product.name'))->limit(20),
                 Tables\Columns\TextColumn::make('created_at')->label(__('product.created_at')),
                 Tables\Columns\TextColumn::make('updated_at')->label(__('product.updated_at')),
             ])
@@ -77,9 +84,9 @@ class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'index' => ListProducts::route('/'),
+            'create' => CreateProduct::route('/create'),
+            'edit' => EditProduct::route('/{record}/edit'),
         ];
     }
 }

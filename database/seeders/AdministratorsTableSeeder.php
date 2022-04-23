@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Seeders;
 
 use Database\Factories\AdministratorFactory;
 use Illuminate\Database\Seeder;
 
-class AdministratorsTableSeeder extends Seeder
+final class AdministratorsTableSeeder extends Seeder
 {
     public function run()
     {

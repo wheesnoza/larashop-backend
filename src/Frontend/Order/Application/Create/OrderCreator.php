@@ -2,81 +2,47 @@
 
 namespace Src\Frontend\Order\Application\Create;
 
-use App\Frontend\Purchase\Exceptions\NotEnoughStockException;
 use Src\Frontend\Auth\Domain\CustomerAuthRepository;
-use Src\Frontend\Purchase\Domain\Order;
-use Src\Frontend\Purchase\Domain\OrderPriority;
-use Src\Frontend\Purchase\Domain\OrderQuantity;
-use Src\Frontend\Purchase\Domain\OrderRepository;
-use Src\Frontend\Purchase\Domain\OrderState;
-use Src\Frontend\Purchase\Domain\OrderUuid;
-use Src\Frontend\Stock\Domain\StockRepository;
-use Src\Frontend\Variant\Domain\VariantRepository;
+use Src\Frontend\Order\Domain\BuyRepository;
+use Src\Frontend\Order\Domain\Order;
+use Src\Frontend\Order\Domain\OrderPriority;
+use Src\Frontend\Order\Domain\OrderQuantity;
+use Src\Frontend\Order\Domain\OrderState;
+use Src\Frontend\Order\Domain\OrderUuid;
+use Src\Frontend\Variant\Domain\VariantUuid;
 use Src\Shared\Domain\Bus\Event\EventBus;
-use Src\Shared\Domain\Transaction\TransactionRepository;
 
 final class OrderCreator
 {
     private CustomerAuthRepository $customerAuthRepository;
     private EventBus $eventBus;
-    private OrderRepository $purchaseRepository;
-    private VariantRepository $variantRepository;
-    private StockRepository $stockRepository;
-    private TransactionRepository $transactionRepository;
+    private BuyRepository $buyRepository;
 
     public function __construct(
         CustomerAuthRepository $customerAuthRepository,
-        OrderRepository        $purchaseRepository,
-        EventBus               $eventBus,
-        VariantRepository      $variantRepository,
-        StockRepository        $stockRepository,
-        TransactionRepository  $transactionRepository
+        BuyRepository $buyRepository,
+        EventBus $eventBus,
     ) {
         $this->customerAuthRepository = $customerAuthRepository;
         $this->eventBus = $eventBus;
-        $this->purchaseRepository = $purchaseRepository;
-        $this->variantRepository = $variantRepository;
-        $this->stockRepository = $stockRepository;
-        $this->transactionRepository = $transactionRepository;
+        $this->buyRepository = $buyRepository;
     }
 
-    public function __invoke(array $attributes): ?Order
+    public function __invoke(array $attributes): Order
     {
-        $variant = $this->variantRepository->find($attributes['variant_uuid']);
-
-        $quantity = new OrderQuantity($attributes['quantity']);
-
-        $purchase = Order::create(
+        $order = Order::create(
             OrderUuid::generate(),
             $this->customerAuthRepository->user()->uuid(),
-            $variant->uuid(),
+            new VariantUuid($attributes['variant_uuid']),
             OrderState::Reserved,
             OrderPriority::from($attributes['priority']),
-            $quantity
+            new OrderQuantity($attributes['quantity'])
         );
 
-        $this->transactionRepository
-            ->begin();
+        $this->buyRepository->buy($order);
 
-        $stock = $this->stockRepository
-            ->ensure($variant, $quantity);
+        $this->eventBus->publish(...$order->pullDomainEvents());
 
-        $this->purchaseRepository->save($purchase);
-
-        if ($quantity->isBiggerThan($stock->count())) {
-            $this->transactionRepository
-                ->rollback();
-            throw (new NotEnoughStockException())
-                ->setVariant($variant);
-        }
-
-        $stock->reduce();
-
-        $this->transactionRepository
-            ->commit();
-
-        $this->eventBus->publish(...$purchase->pullDomainEvents());
-
-        return $purchase;
+        return $order;
     }
 }

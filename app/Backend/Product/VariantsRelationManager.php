@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Filament\Resources\ProductResource\RelationManagers;
+namespace App\Backend\Product;
 
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
@@ -10,13 +9,28 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
 
-class VariantsRelationManager extends HasManyRelationManager
+final class VariantsRelationManager extends HasManyRelationManager
 {
     protected static string $relationship = 'variants';
 
     protected static ?string $recordTitleAttribute = 'id';
+
+    /**
+     * @return string|null
+     */
+    public static function getPluralLabel(): ?string
+    {
+        return '種類';
+    }
+
+    /**
+     * @return string|null
+     */
+    public static function getLabel(): ?string
+    {
+        return '種類';
+    }
 
     public static function form(Form $form): Form
     {
@@ -50,12 +64,5 @@ class VariantsRelationManager extends HasManyRelationManager
                         return $query->when($data['price'], fn (Builder $query, $price): Builder => $query->wherePrice('price', '>=', $price));
                     })
             ]);
-    }
-
-    protected function mutateFormDataBeforeCreate(array $data): array
-    {
-        $data['uuid'] = Str::uuid();
-
-        return $data;
     }
 }
