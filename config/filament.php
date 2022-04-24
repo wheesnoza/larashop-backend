@@ -129,6 +129,7 @@ return [
             \App\Backend\Order\OrderResource::class,
             \App\Backend\Product\ProductResource::class,
             \App\Backend\Customer\CustomerResource::class,
+            \App\Backend\Administrator\AdministratorResource::class,
         ],
     ],
 
