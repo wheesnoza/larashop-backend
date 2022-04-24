@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Backend\Administrator;
 
@@ -9,7 +9,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Columns\TextColumn;
 
-class AdministratorResource extends Resource
+final class AdministratorResource extends Resource
 {
     protected static ?string $model = Administrator::class;
 
