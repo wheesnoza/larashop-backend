@@ -3,6 +3,7 @@
 namespace App\Backend\Customer;
 
 use App\Shared\Models\Customer;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -27,7 +28,10 @@ final class CustomerResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([]);
+            ->schema([
+                Toggle::make('suspended')
+                    ->label('アカウント停止する')
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -35,9 +39,14 @@ final class CustomerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('uuid')->label('UUID')->limit(8),
                 Tables\Columns\TextColumn::make('full_name')->label('氏名'),
                 Tables\Columns\TextColumn::make('email')->label('メールアドレス'),
+                Tables\Columns\BooleanColumn::make('suspended')
+                    ->trueIcon('heroicon-o-x-circle')
+                    ->falseIcon('heroicon-o-check-circle')
+                    ->trueColor('danger')
+                    ->falseColor('success')
+                    ->label('有効'),
                 Tables\Columns\TextColumn::make('created_at')->label('登録日時'),
                 Tables\Columns\TextColumn::make('updated_at')->label('更新日時'),
             ])

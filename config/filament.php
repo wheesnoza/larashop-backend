@@ -162,8 +162,8 @@ return [
     */
 
     'livewire' => [
-        'namespace' => 'App\\Filament',
-        'path' => app_path('Filament'),
+        'namespace' => 'App\\Backend',
+        'path' => app_path('Backend'),
     ],
 
     /*

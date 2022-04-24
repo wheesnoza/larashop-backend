@@ -3,6 +3,7 @@
 namespace App\Backend\Order;
 
 use App\Shared\Models\Order;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -27,7 +28,9 @@ final class OrderResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([]);
+            ->schema([
+                TextInput::make('id'),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -35,7 +38,6 @@ final class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('uuid')->label('UUID')->limit(8),
                 Tables\Columns\BadgeColumn::make('state')->enum([
                     1 => '注文済',
                     2 => '準備中',
@@ -53,7 +55,6 @@ final class OrderResource extends Resource
                 ])->label('優先度'),
                 Tables\Columns\TextColumn::make('quantity')->label('注文数'),
                 Tables\Columns\TextColumn::make('created_at')->label('注文日時'),
-                Tables\Columns\TextColumn::make('updated_at')->label('更新日時'),
             ])
             ->defaultSort('created_at');
     }
@@ -62,6 +63,7 @@ final class OrderResource extends Resource
     {
         return [
             'index' => ListOrders::route('/'),
+            'view' => ViewOrder::route('/{record}'),
         ];
     }
 }

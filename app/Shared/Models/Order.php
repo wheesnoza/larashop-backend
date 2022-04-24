@@ -33,12 +33,6 @@ final class Order extends Model
         'priority' => OrderPriority::class,
     ];
 
-    protected $hidden = [
-        'id',
-        'customer_id',
-        'variant_id',
-    ];
-
     public function variant(): HasOne
     {
         return $this->hasOne(

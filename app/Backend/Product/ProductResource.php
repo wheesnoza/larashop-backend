@@ -32,10 +32,10 @@ final class ProductResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->required()
-                    ->maxLength('255'),
+                    ->maxLength(255),
                 TextInput::make('description')
                     ->nullable()
-                    ->maxLength('255'),
+                    ->maxLength(255),
                 HasManyRepeater::make('variants')
                     ->relationship('variants')
                     ->schema([
@@ -56,7 +56,7 @@ final class ProductResource extends Resource
                             ->numeric(),
                     ])
                     ->minItems(1)
-                    ->columns(2)
+                    ->columns()
                     ->disableItemMovement()
             ]);
     }
@@ -66,7 +66,6 @@ final class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label(__('product.id')),
-                Tables\Columns\TextColumn::make('uuid')->label(__('product.uuid'))->limit(8),
                 Tables\Columns\TextColumn::make('name')->label(__('product.name'))->limit(20),
                 Tables\Columns\TextColumn::make('created_at')->label(__('product.created_at')),
                 Tables\Columns\TextColumn::make('updated_at')->label(__('product.updated_at')),
@@ -87,6 +86,7 @@ final class ProductResource extends Resource
             'index' => ListProducts::route('/'),
             'create' => CreateProduct::route('/create'),
             'edit' => EditProduct::route('/{record}/edit'),
+            'view' => ViewProduct::route('/{record}'),
         ];
     }
 }

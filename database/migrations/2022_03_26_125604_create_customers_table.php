@@ -14,12 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->snowflake()->primary();
+            $table->snowflake()
+                ->primary();
             $table->string('email')
                 ->unique();
-            $table->string('password');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('password')
+                ->nullable();
+            $table->string('first_name')
+                ->nullable();
+            $table->string('last_name')
+                ->nullable();
+            $table->boolean('suspended')
+                ->default(false);
             $table->timestamps();
         });
     }

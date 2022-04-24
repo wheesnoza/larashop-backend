@@ -26,7 +26,8 @@ final class Customer extends Authenticatable
         'email',
         'password',
         'first_name',
-        'last_name'
+        'last_name',
+        'suspended',
     ];
 
     protected $hidden = [
@@ -35,9 +36,10 @@ final class Customer extends Authenticatable
 
     protected $casts = [
         'id' => SnowflakeId::class,
+        'suspended',
     ];
 
-    public function purchases(): HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
